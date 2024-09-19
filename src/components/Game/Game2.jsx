@@ -128,11 +128,10 @@ const Game = () => {
         const maxDistance = 150;
         const offset = Math.min(50, (maxDistance - distance) / maxDistance * 10);
 
-        // Calcular nueva posición
+   
         let newTop = parseFloat(buttonPosition.top) + offset * (distanceY / distance);
         let newLeft = parseFloat(buttonPosition.left) + offset * (distanceX / distance);
-
-        // Limitar la nueva posición dentro de los límites de la pantalla
+ 
         newTop = Math.max(0, Math.min(window.innerHeight - rect.height, newTop));
         newLeft = Math.max(0, Math.min(window.innerWidth - rect.width, newLeft));
 

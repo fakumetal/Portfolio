@@ -78,7 +78,7 @@ export const projectsData = [
     backgroundImage: backgroundVisitAR,
     description: "Aplicación desarrollada en Ionic para gestionar y hacer seguimiento de visitas de pacientes en domicilio. Permite a los profesionales de la salud registrar y actualizar información en tiempo real, utilizando Firebase para la autenticación y sincronización.",
     images: [image8VisitAR, image1VisitAR, image3VisitAR, image4VisitAR, image5VisitAR, image6VisitAR, image7VisitAR],
-    isInDevelopment: false,  // No está en desarrollo
+    isInDevelopment: false,   
   },
  
  
@@ -86,16 +86,16 @@ export const projectsData = [
     title: "Portfolio",
     backgroundImage:eyesHappy ,
    description: "Este portafolio ha evolucionado infiltrandose en la lista de proyectos. Si no se detiene ahora, pronto dominará el mundo!. Para evitar lo inevitable mejor elimínalo antes de que sea tarde." ,
-    url: "#", // O el enlace al portafolio si es necesario
+    url: "#",  
     images: [ eyesHappy],
-    isInDevelopment: false,  // No está en desarrollo
+    isInDevelopment: false,   
   },
   {
     title: "Enigmax",
     backgroundImage: backgroundEnigmax,
     description: "Empresa dedicada a la realización de juegos de rol inmersivos e innovadores. Nacida de la colaboración entre amigos, ofrece experiencias lúdicas únicas. Visita <a href='https://www.enigmaxoficial.com/#/' target='_blank' rel='noopener noreferrer'>EnigmaxOficial</a>.",
     images: [backgroundEnigmax],
-    isInDevelopment: false,  // No está en desarrollo
+    isInDevelopment: false,   
   },
   
   {
@@ -103,13 +103,13 @@ export const projectsData = [
     backgroundImage: backgroundSucur,
     description: "Solución contable avanzada desarrollada con Ionic ( App )  y Electron ( Software ) para monitorizar ingresos y egresos en sucursales mayoristas. Automatiza procesos financieros, facilita el intercambio con Excel y optimiza la gestión financiera.",
     images: [image1Sucur, image2Sucur, image3Sucur, image4Sucur, image5Sucur, image6Sucur, image7Sucur, image8Sucur],
-    isInDevelopment: false,  // No está en desarrollo
+    isInDevelopment: false,  
   },
   {
     title: "Calu",
     backgroundImage: backgroundCalu,
     description: "Sitio web para una agencia de marketing con diseño atractivo y plataforma back-end personalizable. Permite la edición detallada, gestión de contenidos, visualización de analíticas y optimización SEO. Visita <a href='https://calu-mkt.com/#/' target='_blank' rel='noopener noreferrer'>calu-mkt</a>.",
     images: [backgroundCalu],
-    isInDevelopment: false,  // No está en desarrollo
+    isInDevelopment: false,  
   },
 ];

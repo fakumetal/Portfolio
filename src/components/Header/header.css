@@ -1,8 +1,8 @@
 .header {
-    position: fixed; /* Mantiene el header fijo en la parte superior */
-    top: 0; /* Posiciona el header en la parte superior de la ventana */
-    left: 0; /* Alinea el header con el borde izquierdo de la ventana */
-    width: 100%; /* Asegura que el header ocupe todo el ancho de la ventana */
+    position: fixed;  
+    top: 0;  
+    left: 0;  
+    width: 100%;  
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,7 +57,7 @@
     font-size: 1rem;
     margin-right: 50px;
   }
-  /* Estilos del nav en pantallas grandes */
+ 
   .nav {
     display: flex;
     gap: 20px;
@@ -87,7 +87,7 @@
       z-index: 1;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease-in-out; /* Añade la transición */
+      transition: max-height 0.3s ease-in-out;  
     }
   
     .nav.open {
@@ -103,10 +103,10 @@
       margin: 10px 0;
       font-size: 1.2rem;
       opacity: 0;
-      transition: opacity 0.3s ease-in-out; /* Transición para los enlaces */
+      transition: opacity 0.3s ease-in-out;  
     }
   
     .nav.open a {
-      opacity: 1; /* Los enlaces aparecerán gradualmente */
+      opacity: 1; 
     }
   }

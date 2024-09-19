@@ -22,10 +22,10 @@ font-size: 2rem;
     overflow: hidden;
   }
   
-/* Clases de fade out */
+ 
 .fade-out {
     opacity: 0;
-    transition: opacity 0.5s ease-out; /* Animación de fade out */
+    transition: opacity 0.5s ease-out; 
   }
   
   .fade {
@@ -47,11 +47,7 @@ font-size: 2rem;
   .fade-exit-active {
     opacity: 0;
   }
-  
-  /* Ocultar completamente el proyecto */
- 
-  
-  /* Quitar scroll al mostrar modal */
+   
   .no-scroll {
     overflow: hidden;
   }

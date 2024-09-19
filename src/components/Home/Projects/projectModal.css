@@ -1,4 +1,4 @@
-/* General modal styles */
+ 
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -167,12 +167,12 @@
     min-height: 500px;
     height: auto;
     border-radius: 10px;
-    transition: opacity 0.5s ease; /* Solo la opacidad tiene transición */
-    opacity: 0; /* Inicia invisible */
+    transition: opacity 0.5s ease;  
+    opacity: 0; 
   }
   
   .carousel-image.show {
-    opacity: 1; /* Visible */
+    opacity: 1;  
   }
   
   

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { usePortfolio } from '../Projects/PortfolioContext'; // Ajusta la ruta según sea necesario
+import { usePortfolio } from '../Projects/PortfolioContext';  
 import "./banner.css";
-import eyes from '../../../assets/projects/eyes3.mp4'; // Importa el GIF de los ojos
+import eyes from '../../../assets/projects/eyes3.mp4'; 
 
 const Banner = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,7 +9,7 @@ const Banner = () => {
   const [visibleIcons, setVisibleIcons] = useState(0);
   const { isPortfolioDeleted } = usePortfolio();
 
-  // Cambia el título dependiendo de si "Portafolio" fue eliminado
+ 
   const fullTitle = isPortfolioDeleted ? "Hola humano! Soy el portfolio que quieres eliminar" : "Hola, soy fmetal";
   const fullDescription = isPortfolioDeleted ? "[Bip Bop] Aunque tal vez lo hiciste por error, te lo advierto: no lo intentes nuevamente..." : "Desarrollador FullStack especializado en React para web, móvil y desktop.";
 
@@ -29,7 +29,7 @@ const Banner = () => {
   useEffect(() => {
     setIsVisible(true);
 
-    // Efecto de escritura para el título
+   
     let titleIndex = 0;
     const typeTitle = () => {
       if (titleIndex < fullTitle.length) {
@@ -40,13 +40,13 @@ const Banner = () => {
     };
     typeTitle();
 
-    // Mostrar íconos de izquierda a derecha
+ 
     let iconIndex = 0;
     const showIcons = () => {
       if (iconIndex < icons.length) {
-        setVisibleIcons(iconIndex + 1); // Mostrar un ícono más
+        setVisibleIcons(iconIndex + 1); 
         iconIndex++;
-        setTimeout(showIcons, 50); // Retraso entre íconos
+        setTimeout(showIcons, 50);  
       }
     };
     showIcons();
@@ -56,7 +56,7 @@ const Banner = () => {
     <div className="banner" id='banner'>
       <div className="banner-overlay"></div>
       <div className={`banner-content ${isVisible ? 'show' : ''}`}>
-        {/* Renderizado condicional del ícono o el GIF de ojos */}
+   
         {isPortfolioDeleted ? (
     <video src={eyes} alt="eyes video" className="eyes-video" autoPlay loop muted />
         ) : (

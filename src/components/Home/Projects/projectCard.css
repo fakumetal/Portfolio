@@ -22,7 +22,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen */
+    background-color: rgba(0, 0, 0, 0.5); 
   }
   
   
@@ -35,12 +35,12 @@
   }
   
   .project-card:hover {
-    transform: scale(1.1); /* Efecto de zoom al hacer hover */
+    transform: scale(1.1); 
   }
 
   .project-card-hover {
     position: absolute;
-    bottom: -50px; /* Empieza oculto fuera de la vista */
+    bottom: -50px;  
     left: 0;
     width: 100%;
     height: 50px;
@@ -50,12 +50,12 @@
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    transition: bottom 0.3s ease; /* Transición suave */
+    transition: bottom 0.3s ease; 
     z-index: 99;
   }
   
   .project-card:hover .project-card-hover {
-    bottom: 0; /* Aparece desde abajo */
+    bottom: 0;  
    
   }
 
