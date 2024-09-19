@@ -1,0 +1,112 @@
+.header {
+    position: fixed; /* Mantiene el header fijo en la parte superior */
+    top: 0; /* Posiciona el header en la parte superior de la ventana */
+    left: 0; /* Alinea el header con el borde izquierdo de la ventana */
+    width: 100%; /* Asegura que el header ocupe todo el ancho de la ventana */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0d0d0d;
+    z-index: 3;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: aliceblue;
+  }
+  
+  .nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+  }
+  
+  .nav button:hover {
+    color: #0056b3;
+    font-weight: bold;
+  
+  }
+  .hamburger {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+ 
+  }
+  .header button{
+    border: none;
+    text-decoration: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 50px;
+  }
+  /* Estilos del nav en pantallas grandes */
+  .nav {
+    display: flex;
+    gap: 20px;
+    
+  }
+ 
+  
+  .nav a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: whitesmoke;
+  }
+  @media (max-width: 600px) {
+    .header button{
+  margin-bottom: 5px;
+    }
+    .nav {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: #0d0d0d;
+      width: 100%; 
+    
+    
+      z-index: 1;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out; /* Añade la transición */
+    }
+  
+    .nav.open {
+      max-height: 230px; 
+ 
+    }
+  
+    .hamburger {
+      display: block;  
+    }
+  
+    .nav a {
+      margin: 10px 0;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out; /* Transición para los enlaces */
+    }
+  
+    .nav.open a {
+      opacity: 1; /* Los enlaces aparecerán gradualmente */
+    }
+  }

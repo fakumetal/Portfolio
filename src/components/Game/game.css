@@ -1,0 +1,150 @@
+ 
+/* game.css */
+.game {
+    position: relative; 
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+ 
+  }
+  
+  button {
+    width: 100px;  
+    height: 50px; 
+     
+  }
+  .impossible-mode-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .eyes-video2 {
+    position: absolute;
+  
+    left: 49%;
+    transform: translateX(-50%);
+    width: 100%; /* Ajusta según el tamaño deseado */
+    height: auto; /* Mantiene la proporción del video */
+    object-fit: cover; /* Asegura que el video cubra el contenedor */
+    transition: opacity 1s ease;
+  }
+
+  
+  
+  .video-hidden {
+    opacity: 0;
+  }
+  
+  .video-visible {
+    opacity: 1;
+  }
+  .message {
+    position: absolute;
+    top: 10px; /* Ajusta la posición según tus necesidades */
+    left: 50%;
+   
+    width: 80%;
+    transform: translateX(-50%);
+    font-size: 20px; /* Ajusta el tamaño de la fuente según tus necesidades */
+    color: white;
+     padding: 10px;
+    border-radius: 5px;
+ 
+   
+  }
+
+  .message.fade-in {
+    
+    opacity: 1;
+    transform: translateX(-50%) translateX(0%);
+  }
+ 
+  .message.fade-out {
+    opacity: 0;
+    transform: translateX(-50%) translateX(100%);
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 1); /* Fondo negro semitransparente */
+    opacity: 0;
+    pointer-events: none; /* No intercepta clics */
+    z-index: 10;
+    transition: opacity 2s ease; /* Transición de desvanecimiento */
+  }
+  
+  .overlay.visible {
+    opacity: 1;
+  }
+
+
+
+
+
+
+
+/* game.css */
+ 
+
+
+
+.message-enter {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  .message-exit {
+    opacity: 1;
+    animation: fadeOut 1s forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+
+
+
+
+
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+ 
+
+

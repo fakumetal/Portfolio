@@ -1,0 +1,50 @@
+#root {
+ 
+  margin: 0 auto;
+ background: #242424;
+  text-align: center;
+}
+
+ 
+html {
+  scroll-behavior: smooth;
+}
+ 
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+ 
+
+.about h2, .projects h2, .contact h2 {
+  margin-bottom: 20px;
+}
+
+
+
+
+
+.fade {
+  transition: opacity 1s ease;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  
+}

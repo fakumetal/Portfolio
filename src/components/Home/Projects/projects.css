@@ -1,0 +1,74 @@
+.projects h2{
+font-size: 2rem;
+}
+.projects {
+    padding: 50px;
+  
+    text-align: center;
+  }
+.projects .project-title{
+    font-size: 3rem;
+}
+  .projects-container {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .no-scroll {
+    overflow: hidden;
+  }
+  
+/* Clases de fade out */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out; /* Animación de fade out */
+  }
+  
+  .fade {
+    transition: opacity 1s ease;
+  }
+  
+  .fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+  }
+  
+  /* Ocultar completamente el proyecto */
+ 
+  
+  /* Quitar scroll al mostrar modal */
+  .no-scroll {
+    overflow: hidden;
+  }
+  
+@media (max-width: 1040px) {
+    .projects-container {
+        width: 90%;
+      
+      }
+      
+  }
+  @media (max-width: 680px) {
+
+    .projects h2 {
+   font-size: 2rem;
+      
+      }
+      
+  }
+ 
