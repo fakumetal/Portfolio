@@ -76,9 +76,9 @@ const Home = () => {
         <Contact />
       </section>
       
-      <button className="scroll-to-top" onClick={scrollToTop}>
-        <i className="fas fa-chevron-up"></i>
-      </button>
+      <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
+  <i className="fas fa-chevron-up"></i>
+</button>
     </div>
   );
 };

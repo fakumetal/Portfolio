@@ -4,7 +4,7 @@ import ProjectModal from './ProjectModal';
 import './projects.css';
 import { projectsData } from './ProjectsData';
 import { usePortfolio } from './PortfolioContext';
-import eyes2 from '../../../assets/projects/eyes-angry.png';
+import eyes2 from '../../../assets/projects/eyes-angry.webp';
 
 
 const Projects = () => {

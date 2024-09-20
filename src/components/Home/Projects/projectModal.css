@@ -227,8 +227,9 @@
  
   @media (max-width: 860px) {
     .carousel-image{
- width: 90vw;
- min-height: 250px;
+      max-width: 90vw;
+
+ max-height:650px;
  
     }
       }
@@ -266,4 +267,9 @@
       .modal-description{
         min-width: 0;
       }
+      .carousel-image{
+        max-width: 90vw;
+        min-height: 250px;
+        
+           }
   }

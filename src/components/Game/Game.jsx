@@ -58,7 +58,7 @@ const Game = () => {
     };
   };
   const handleClick = () => {
-    // Mueve el botón inmediatamente
+
     setButtonPosition(getRandomPosition());
   
     if (clickCount < messages.length - 1) {

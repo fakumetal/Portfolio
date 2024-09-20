@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './header.css';  
-import benelli from "../../assets/projects/benelli.png";
-import deletedPortfolioImg from "../../assets/projects/eyes-happy.png";  
+import benelli from "../../assets/projects/benelli.webp";
+import deletedPortfolioImg from "../../assets/projects/eyes-happy.webp";  
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

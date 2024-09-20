@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { usePortfolio } from '../Projects/PortfolioContext';
 import './about.css'
-const DELAY_BETWEEN_ICONS = 50;
 
+const DELAY_BETWEEN_ICONS = 50;
 const getIcons = () => [
   "fab fa-react",
   "fab fa-js-square",
@@ -39,7 +39,7 @@ const getSkills = () => [
   'Git',
   'GitHub',
 ];
-
+const description = 'Soy un Desarrollador Full Stack con una sólida experiencia en React y las últimas tecnologías.Me especializo en construir aplicaciones web que sean tanto responsivas como eficientes, y en gestionar bases de datos para que todo funcione a la perfección.Además, tengo experiencia en el desarrollo de aplicaciones móviles usando Ionic y React Native, y aplicaciones de escritorio con Electron.Me encanta asegurar que cada proyecto tenga una solución escalable y';
 const getTitle = (isPortfolioDeleted) => (isPortfolioDeleted ? "Sobre mi creador..." : "Sobre Mí");
 
 const getAboutStyle = (isPortfolioDeleted) => ({
@@ -91,14 +91,7 @@ const About = () => {
         <div className="about-description">
           <h2>{getTitle(isPortfolioDeleted)}</h2>
           <p>
-            Soy un Desarrollador Full Stack con una sólida experiencia en React
-            y las últimas tecnologías. Me especializo en construir aplicaciones
-            web que sean tanto responsivas como eficientes, y en gestionar bases
-            de datos para que todo funcione a la perfección. Además, tengo
-            experiencia en el desarrollo de aplicaciones móviles usando Ionic y
-            React Native, y aplicaciones de escritorio con Electron. Me
-            encanta asegurar que cada proyecto tenga una solución escalable y
-            adaptada a sus necesidades.
+           {description}
           </p>
           {getIconsContent(getIcons(), visibleIcons)}
         </div>
