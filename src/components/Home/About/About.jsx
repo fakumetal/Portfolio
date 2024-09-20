@@ -39,7 +39,7 @@ const getSkills = () => [
   'Git',
   'GitHub',
 ];
-const description = 'Soy un Desarrollador Full Stack con una sólida experiencia en React y las últimas tecnologías.Me especializo en construir aplicaciones web que sean tanto responsivas como eficientes, y en gestionar bases de datos para que todo funcione a la perfección.Además, tengo experiencia en el desarrollo de aplicaciones móviles usando Ionic y React Native, y aplicaciones de escritorio con Electron.Me encanta asegurar que cada proyecto tenga una solución escalable y';
+const description = 'Soy un Desarrollador Full Stack con una sólida experiencia en React y las últimas tecnologías.Me especializo en construir aplicaciones web que sean tanto responsivas como eficientes, y en gestionar bases de datos para que todo funcione a la perfección.Además, tengo experiencia en el desarrollo de aplicaciones móviles usando Ionic y React Native, y aplicaciones de escritorio con Electron. Me encanta asegurar que cada proyecto tenga una solución escalable y a medida';
 const getTitle = (isPortfolioDeleted) => (isPortfolioDeleted ? "Sobre mi creador..." : "Sobre Mí");
 
 const getAboutStyle = (isPortfolioDeleted) => ({
