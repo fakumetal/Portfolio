@@ -3,9 +3,13 @@ import react from '@vitejs/plugin-react'
 import compression from 'vite-plugin-compression';
  
 export default defineConfig({
-  plugins: [react() , compression({
-    algorithm: 'brotliCompress',  
-    ext: '.gz',  
-    threshold: 10240  
-  })],
+  base: '/Portfolio/',  
+  plugins: [
+    react(),
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.gz',
+      threshold: 10240
+    })
+  ],
 })
