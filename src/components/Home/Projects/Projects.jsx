@@ -20,7 +20,7 @@ const Projects = () => {
         title: isPortfolioDeleted ? "Portfolio" : "Portfolio",
         backgroundImage: isPortfolioDeleted ? [eyes2] : project.backgroundImage,
         description: isPortfolioDeleted
-          ? "¿ Otra vez aquí ? Piensa bien en tu decisión y actúa con precaución. No te atrevas [Bip Bop]"
+          ? "¿ Otra vez aquí ? Piensa bien en tu decisión y actúa con precaución. No te atrevas"
           : project.description,
         images: isPortfolioDeleted ? [eyes2] : project.images,
       };
@@ -29,7 +29,7 @@ const Projects = () => {
   });
 
 
-  const title = isPortfolioDeleted ? "..." : "Algunos de mis proyectos";
+  const title = isPortfolioDeleted ? "..." : "Algunos proyectos";
   const scrollToBanner = () => {
     const bannerSection = document.getElementById('banner');
     if (bannerSection) {

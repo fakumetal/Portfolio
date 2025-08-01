@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0px;
     background-color: #0d0d0d;
     z-index: 3;
   }
@@ -14,6 +14,7 @@
   .logo {
     display: flex;
     align-items: center;
+    margin-left: 20px;
   }
   
   .profile-img {
@@ -29,17 +30,41 @@
     color: aliceblue;
   }
   
-  .nav a {
+ 
+  .nav button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0  auto;
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.5s, transform 0.5s; /* Suaviza color y posición */
+  }
+  .header span{
     margin: 0 15px;
     text-decoration: none;
-    color: black;
+    color: aliceblue;
     font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.5s, transform 0.5s; /* Suaviza color y posición */
   }
-  
   .nav button:hover {
     color: #0056b3;
-    font-weight: bold;
-  
+    transform: translateY(-2px);
+    
+  }
+  .header span:hover {
+ 
+    transform: translateY(-2px);
+    
   }
   .hamburger {
     display: none;
@@ -64,11 +89,15 @@
     cursor: pointer;
     font-size: 1.5rem;
     margin-right: 30px;
+    font-weight: 600;
+  
   }
- 
+
   .nav {
     display: flex;
-    gap: 20px;
+    justify-content: center;  
+    align-items: center;
+    margin-bottom: -25px;
     
   }
  
@@ -78,9 +107,19 @@
     font-size: 1rem;
     color: whitesmoke;
   }
-  @media (max-width: 600px) {
+
+ 
+  @media (max-width: 860px) {
+
+    .header .nav button{
+   
+    }
+    .header .nav.open{
+ width: 100vw;
+ 
+    }
     .header button{
-      
+   
   margin-bottom: 5px;
     }
     .nav {
@@ -88,11 +127,11 @@
       flex-direction: column;
       position: absolute;
       top: 60px;
-      right: 0;
+  
       background-color: #0d0d0d;
       width: 100%; 
       align-items: center;
-    
+  
       z-index: 1;
       max-height: 0;
       overflow: hidden;
@@ -123,3 +162,5 @@
       opacity: 1; 
     }
   }
+
+  

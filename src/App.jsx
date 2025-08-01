@@ -9,6 +9,8 @@ import { usePortfolio } from "./components/Home/Projects/PortfolioContext";
 import Game from "./components/Game/Game";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
  
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const App = () => {
   const { isPortfolioDeleted, portfolioDeleteCount } = usePortfolio();
   const [showGame, setShowGame] = useState(false);

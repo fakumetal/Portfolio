@@ -1,4 +1,4 @@
-import React from 'react';
+ 
 import './contact.css';
 
 const Contact = () => {
@@ -9,12 +9,13 @@ const Contact = () => {
 
       <div className="contact-info">
         <a href="mailto:faku.metal@gmail.com" className="contact-item email">
-          <i className="fas fa-envelope"></i>
+          <img style={{width:'30px'}} src="./mail.svg" alt="" />
           <span>Mail</span>
         </a>
 
         <a href="https://wa.me/2664895193" className="contact-item whatsapp" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-whatsapp"></i>
+    
+          <img style={{width:'30px', marginLeft:'-10px', marginRight:'10px'}}  src="./wsp.svg" alt="" />
           <span>Whastapp</span>
         </a>
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import Banner from '../../components/Home/Banner/Banner';
 import About from '../../components/Home/About/About';
 import Projects from '../../components/Home/Projects/Projects';
@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     const options = {
-      threshold: 0.3,
+      threshold: 0.25,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -77,7 +77,7 @@ const Home = () => {
       </section>
       
       <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
-  <i className="fas fa-chevron-up"></i>
+  <img src="./up.svg" alt="scroll-to-top" style={{width:'35px', height:'50px'}} />
 </button>
     </div>
   );

@@ -8,7 +8,42 @@
     font-size: 1.3rem;
  
   }
-  
+.description-text {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out; /* Tiempo de transición reducido */
+}
+
+.description-text.fade-out {
+  opacity: 0;
+}
+
+.description-text.fade-in {
+  opacity: 1;
+}
+@keyframes sinusoidal {
+  0% {
+    transform: translateY(0) rotate(0deg); /* Sin rotación al principio */
+  }
+  25% {
+    transform: translateY(-20px) rotate(15deg); /* Subida con rotación */
+  }
+  50% {
+    transform: translateY(0) rotate(-15deg); /* Regreso al medio con rotación */
+  }
+ 
+  100% {
+    transform: translateY(0) rotate(0deg); /* Regreso al medio sin rotación */
+  }
+}
+
+.bounce-sinusoidal {
+  animation: sinusoidal 2s ease-in-out infinite; /* Animación continua y suave */
+  display: inline-block;
+  transform-origin: center; /* Mantén el pivote en el centro del icono */
+}
+
+
+
   .about-container {
     display: flex;
     width: 85%;
@@ -40,6 +75,27 @@
     font-size: 1.75rem;
   }
   
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    transition: all 0.5s ease; /* Transición suave */
+  }
+  
+  .skill-box {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transform-origin: center center; /* Mantiene el pivote del movimiento */
+    transition: transform 0.5s ease; /* Transición de movimiento suave */
+  }
+  
+  .skill-box:hover {
+    transform: translateY(-10px); /* Mueve hacia arriba al hacer hover */
+  }
   
   .skills-grid {
     margin-top: 25px;

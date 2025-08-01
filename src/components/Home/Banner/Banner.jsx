@@ -10,7 +10,7 @@ const Banner = () => {
   const { isPortfolioDeleted } = usePortfolio();
 
  
-  const fullTitle = isPortfolioDeleted ? "Hola humano! Soy el portfolio que quieres eliminar" : "Hola, soy fmetal";
+  const fullTitle = isPortfolioDeleted ? "Hola humano! Soy el portfolio que quieres eliminar" : "Hola, soy Facu";
   const fullDescription = isPortfolioDeleted ? "[Bip Bop] Aunque tal vez lo hiciste por error, te lo advierto: no lo intentes nuevamente..." : "Desarrollador FullStack especializado en React para web, móvil y desktop.";
 
   const icons = [
@@ -60,7 +60,7 @@ const Banner = () => {
         {isPortfolioDeleted ? (
     <video src={eyes} alt="eyes video" className="eyes-video" autoPlay loop muted />
         ) : (
-          <i className="fas fa-terminal console-icon"></i>  
+         <img  className="console-icon" src="./terminal-solid.svg" alt="Terminal Icon" />   
         )}
         
         <h1 className="banner-title">

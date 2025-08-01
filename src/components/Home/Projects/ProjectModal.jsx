@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import   { useEffect, useState } from 'react';
 import './projectModal.css';
 
 const ProjectModal = ({ project, onClose, onDelete }) => {
@@ -53,6 +53,27 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
     }, 200);
   };
 
+ 
+  useEffect(() => {
+    const handleKeydown = (event) => {
+      if (event.key === 'ArrowRight') {
+        nextImage();
+      } else if (event.key === 'ArrowLeft') {
+        prevImage();
+      } else if (event.key === 'Escape') {
+        closeImageModal();  
+     
+      }
+    };
+  
+    window.addEventListener('keydown', handleKeydown);
+  
+    return () => {
+      window.removeEventListener('keydown', handleKeydown);
+    };
+  }, [currentIndex, isTransitioning]);
+  
+
   if (!project) return null;
 
   const thumbnailClass = project.title === 'Portfolio' ? 'portfolio-thumbnail' : '';
@@ -81,7 +102,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
           <p className="modal-description" dangerouslySetInnerHTML={{ __html: project.description }} />
           {project.title === 'Portfolio' && (
             <button className='delete' onClick={handleDelete} style={{ fontSize: '24px', border: 'none', borderRadius: '10px' }}>
-              <i className="fa-solid fa-skull"></i>
+              <img src="./skull.svg" alt="" style={{width:'25px'}}/>
             </button>
           )}
         </div>
@@ -108,9 +129,15 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
 
             <div className="carousel-container">
               <button className="carousel-control prev" onClick={prevImage}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M15.7 4.3a1 1 0 00-1.4 0L8 10.6a1 1 0 000 1.4l6.3 6.3a1 1 0 001.4-1.4L10.4 12l5.3-5.3a1 1 0 000-1.4z" />
-                </svg>
+                <img 
+                  style={{
+                    width: '20px', 
+                    marginRight: '50px',
+                    filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.8))'  
+                  }}  
+                  src="./left.svg" 
+                  alt="Left" 
+                />
               </button>
               <img
                 src={project.images[currentIndex]}
@@ -118,9 +145,15 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                 className={`carousel-image ${isTransitioning ? 'fade' : 'show'}`}
               />
               <button className="carousel-control next" onClick={nextImage}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8.3 4.3a1 1 0 011.4 0L16 10.6a1 1 0 010 1.4L11.1 18.3a1 1 0 01-1.4-1.4L13.6 12 8.3 6.7a1 1 0 010-1.4z" />
-                </svg>
+                <img  
+                  style={{
+                    width:'20px',
+                    marginLeft:'50px',
+                    filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.8))'  
+                  }}  
+                  src="./right.svg" 
+                  alt="Right" 
+                />
               </button>
             </div>
           </div>

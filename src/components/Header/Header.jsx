@@ -7,34 +7,27 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPortfolioDeleted, setIsPortfolioDeleted] = useState(false);  
   const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
-    
     const portfolioDeleted = localStorage.getItem('isPortfolioDeleted') === 'true';
     setIsPortfolioDeleted(portfolioDeleted);  
-  }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
 
-  const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setIsMenuOpen(false);  
-    }
-  };
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isMenuOpen]);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(prev => !prev);
+  };
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -65,12 +58,12 @@ const Header = () => {
           alt="Profile"
           className="profile-img"
         />
-     <span className="name">
+        <span className="name">
           {isPortfolioDeleted ? 'Portfolio' : 'Facundo Journade'}  
         </span>
       </div>
 
-      <button className="hamburger" onClick={toggleMenu}>
+      <button className="hamburger" onClick={toggleMenu} ref={buttonRef}>
         ☰
       </button>
 
