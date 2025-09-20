@@ -109,7 +109,7 @@ export const projectsData = [
    {
     title: "Alto Center",
     backgroundImage: altocenter,
-    description: "  Alto Center es un complejo hotelero moderno con múltiples servicios como spa, gimnasio y salones para eventos. La landing fue desarrollada con Next.js, TypeScript e imágenes alojadas en Cloudinary. Visita  <a href='https://altocenter.netlify.app/' target='_blank' rel='noopener noreferrer'>AltoCenter</a>",
+    description: "  Alto Center es un complejo hotelero moderno con múltiples servicios como spa, gimnasio y salones para eventos. La landing fue desarrollada con Next.js, TypeScript e imágenes alojadas en Cloudinary. Visita  <a href='https://complejoaltocenter.com/' target='_blank' rel='noopener noreferrer'>AltoCenter</a>",
     images: [ ],
     isInDevelopment: true,
   },
