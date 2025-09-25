@@ -57,6 +57,7 @@ import image6Ec from "../../../assets/projects/ecommerce/6.webp";
 import image7Ec from "../../../assets/projects/ecommerce/7.webp";
 import image8Ec from "../../../assets/projects/ecommerce/8.webp";
 import image9Ec from "../../../assets/projects/ecommerce/9.webp"; */
+import autoSpa from "../../../assets/projects/AutoSpa/autoSpa.webp";
 export const projectsData = [
  /*   {
     title: "Ecommerce",
@@ -66,13 +67,27 @@ export const projectsData = [
     isInDevelopment: true,
   }, */
  {
-  title: "KIRU ",
+  title: "AutoSpa",
+  backgroundImage: autoSpa,
+  description: "Landing page para AutoSpa, un servicio especializado en lavadero y detailing de autos. Con un diseño moderno y responsivo, realizada con NextJS. Explora más en <a href='https://auto-spa.netlify.app/' target='_blank' rel='noopener noreferrer'>AutoSpa</a>.",
+  images: [],
+  isInDevelopment: true,
+ },
+ {
+  title: "Consultorios Integrados ",
   backgroundImage: kiru,
   description:
-   " KIRU es una landing especializada en urgencias odontológicas que ofrece atención rápida y efectiva. Además, integra una variedad de servicios médicos complementarios como psicología, cardiología y medicina clínica, brindando una solución integral de salud en un solo lugar. Ideal para quienes buscan atención inmediata y multidisciplinaria. Realizado con NextJs  Explora más en <a href='https://urgenciasodontologicas.netlify.app/' target='_blank' rel='noopener noreferrer'>KIRU - Urgencias Odontológicas</a>.",
+   " Consultorios Integrados es una landing especializada que ofrece atención rápida y efectiva. Además, integra una variedad de servicios médicos complementarios como psicología, cardiología y medicina clínica, brindando una solución integral de salud en un solo lugar. Ideal para quienes buscan atención inmediata y multidisciplinaria. Realizado con NextJs  Explora más en <a href='https://consultoriosintegrados.com.ar/' target='_blank' rel='noopener noreferrer'>Consultorios Integrados</a>.",
   images: [ ],
   isInDevelopment: true,
  },
+   {
+    title: "Alto Center",
+    backgroundImage: altocenter,
+    description: "  Alto Center es un complejo hotelero moderno con múltiples servicios como spa, gimnasio y salones para eventos. La landing fue desarrollada con Next.js, TypeScript e imágenes alojadas en Cloudinary. Visita  <a href='https://complejoaltocenter.com/' target='_blank' rel='noopener noreferrer'>AltoCenter</a>",
+    images: [ ],
+    isInDevelopment: false,
+  },
  {
   title: "Bastion Alquileres",
   backgroundImage: bastion,
@@ -81,22 +96,8 @@ export const projectsData = [
   images: [bastion],
   isInDevelopment: false,
  },
- {
-  title: "LavaRiso",
-  backgroundImage: backgroundLava,
-  description:
-   "Aplicación CRM/ERP desarrollada con Ionic y Electron para empresas de reparación de electrodomésticos. Incluye funcionalidades contables, control de stock, y una app móvil para la gestión de técnicos en campo. Proyecto realizado en <a href='https://pochitamadev.com/' target='_blank' rel='noopener noreferrer'>PochitamaDev</a>",
-  images: [image1Lava, image2Lava, image3Lava, image5Lava, image6Lava, image7Lava, image8Lava, image9Lava, image10Lava, image11Lava],
-  isInDevelopment: false,
- },
- {
-  title: "DoseCalc",
-  backgroundImage: dose1,
-  description:
-   "DoseCalc es una aplicación simple desarrollada en React Native diseñada específicamente para enfermería, facilitando el cálculo preciso de dosis de medicamentos inyectables. Con una interfaz intuitiva permite a los profesionales de la salud ingresar concentraciones de medicamentos y calcular las dosis según la presentación. Ademas posee un simple pero útil conversor de unidades.",
-  images: [dose1, dose2, dose3, dose4, dose5],
-  isInDevelopment: false,
- },
+ 
+ 
  {
   title: "Portfolio",
   backgroundImage: eyesHappy,
@@ -106,13 +107,23 @@ export const projectsData = [
   images: [eyesHappy],
   isInDevelopment: false,
  },
-   {
-    title: "Alto Center",
-    backgroundImage: altocenter,
-    description: "  Alto Center es un complejo hotelero moderno con múltiples servicios como spa, gimnasio y salones para eventos. La landing fue desarrollada con Next.js, TypeScript e imágenes alojadas en Cloudinary. Visita  <a href='https://complejoaltocenter.com/' target='_blank' rel='noopener noreferrer'>AltoCenter</a>",
-    images: [ ],
-    isInDevelopment: true,
-  },
+  {
+  title: "DoseCalc",
+  backgroundImage: dose1,
+  description:
+   "DoseCalc es una aplicación simple desarrollada en React Native diseñada específicamente para enfermería, facilitando el cálculo preciso de dosis de medicamentos inyectables. Con una interfaz intuitiva permite a los profesionales de la salud ingresar concentraciones de medicamentos y calcular las dosis según la presentación. Ademas posee un simple pero útil conversor de unidades.",
+  images: [dose1, dose2, dose3, dose4, dose5],
+  isInDevelopment: false,
+ },
+  {
+  title: "LavaRiso",
+  backgroundImage: backgroundLava,
+  description:
+   "Aplicación CRM/ERP desarrollada con Ionic y Electron para empresas de reparación de electrodomésticos. Incluye funcionalidades contables, control de stock, y una app móvil para la gestión de técnicos en campo. Proyecto realizado en <a href='https://pochitamadev.com/' target='_blank' rel='noopener noreferrer'>PochitamaDev</a>",
+  images: [image1Lava, image2Lava, image3Lava, image5Lava, image6Lava, image7Lava, image8Lava, image9Lava, image10Lava, image11Lava],
+  isInDevelopment: false,
+ },
+  
  /*   {
     title: "CRM",
     backgroundImage: image1CRM,

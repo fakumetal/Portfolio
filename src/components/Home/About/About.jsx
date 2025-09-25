@@ -18,6 +18,8 @@ const getIcons = () => [
 
 const getSkills = () => [
  "React",
+ "NextJs",
+ "VUE3",
  "HTML",
  "CSS",
  "SCSS",
@@ -28,7 +30,7 @@ const getSkills = () => [
  "Node.js",
  "Socket.io",
  "Sequelize",
- "MongoDB",
+ "MongoDB/Atlas",
  "Express.js",
  "VPS",
  "React Native",
@@ -42,7 +44,7 @@ const getSkills = () => [
  "GitHub",
 ];
 const description =
- "Desarrollador Full Stack con una sólida experiencia en React y últimas tecnologías. Me especializo en construir aplicaciones web que sean tanto responsivas como eficientes, y en gestionar bases de datos para que todo funcione a la perfección. Además, tengo experiencia en el desarrollo de aplicaciones móviles usando Ionic y React Native, y aplicaciones de escritorio con Electron.";
+ "Desarrollador Full Stack con una sólida experiencia en React, NextJS y últimas tecnologías. Me especializo en construir aplicaciones web que sean tanto responsivas como eficientes, y en gestionar bases de datos para que todo funcione a la perfección. Además, tengo experiencia en el desarrollo de aplicaciones móviles usando Ionic y React Native, y aplicaciones de escritorio con Electron.";
 const getTitle = (isPortfolioDeleted) => (isPortfolioDeleted ? "Sobre mi creador..." : "Sobre Mí");
 
 const getAboutStyle = (isPortfolioDeleted) => ({
