@@ -44,10 +44,19 @@ font-size: 2rem;
     opacity: 1;
   }
   
-  .fade-exit-active {
-    opacity: 0;
+  .see-more-btn {
+    margin-top: 20px;
+ 
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
   }
-   
+  
+ 
   .no-scroll {
     overflow: hidden;
   }

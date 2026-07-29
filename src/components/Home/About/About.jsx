@@ -1,4 +1,4 @@
-import   { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePortfolio } from "../Projects/PortfolioContext";
 import "./about.css";
 
@@ -25,6 +25,8 @@ const getSkills = () => [
  "SCSS",
  "JavaScript",
  "TypeScript",
+ "Supabase",
+ "Python",
  "Linux",
  "Material-UI",
  "Node.js",
@@ -39,7 +41,7 @@ const getSkills = () => [
  "Electron",
  "MySQL",
  "MariaDB",
- "AWS (EC2, Lightsail, RDS)",
+ "AWS (EC2, Lightsail, RDS, S3)",
  "Git",
  "GitHub",
 ];

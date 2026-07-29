@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import './projects.css';
@@ -10,6 +10,7 @@ import eyes2 from '../../../assets/projects/eyes-angry.webp';
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [hiddenProjects, setHiddenProjects] = useState([]);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const { isPortfolioDeleted, setIsPortfolioDeleted, updatePortfolioDeleteCount } = usePortfolio();
 
@@ -78,7 +79,7 @@ const Projects = () => {
       <h2 className='project-title'>{title}</h2>
 
       <div className="projects-container">
-        {modifiedProjectsData.map((project, index) => (
+        {(showAllProjects ? modifiedProjectsData : modifiedProjectsData.slice(0, 9)).map((project, index) => (
           <div
             key={index}
             onClick={() => handleCardClick(project)}
@@ -93,6 +94,15 @@ const Projects = () => {
           </div>
         ))}
       </div>
+
+      {modifiedProjectsData.length > 9 && (
+        <button 
+          className="see-more-btn" 
+          onClick={() => setShowAllProjects(!showAllProjects)}
+        >
+          {showAllProjects ? 'Ver menos' : 'Ver más'}
+        </button>
+      )}
 
       {selectedProject && (
         <ProjectModal

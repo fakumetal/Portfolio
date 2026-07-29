@@ -58,6 +58,26 @@ import image7Ec from "../../../assets/projects/ecommerce/7.webp";
 import image8Ec from "../../../assets/projects/ecommerce/8.webp";
 import image9Ec from "../../../assets/projects/ecommerce/9.webp"; */
 import autoSpa from "../../../assets/projects/AutoSpa/autoSpa.webp";
+import sp from "../../../assets/projects/SyP/sp-logo.png";
+
+import bf0 from "../../../assets/projects/BienFria/0.webp";
+import bf1 from "../../../assets/projects/BienFria/1.webp";
+import bf2 from "../../../assets/projects/BienFria/2.webp";
+import bf3 from "../../../assets/projects/BienFria/3.webp";
+import bf4 from "../../../assets/projects/BienFria/4.webp";
+import bf5 from "../../../assets/projects/BienFria/5.webp";
+import bf6 from "../../../assets/projects/BienFria/6.webp";
+
+import kg0 from "../../../assets/projects/KiruGestion/0.webp";
+import kg1 from "../../../assets/projects/KiruGestion/1.webp";
+import kg2 from "../../../assets/projects/KiruGestion/2.webp";
+import kg3 from "../../../assets/projects/KiruGestion/3.webp";
+import kg4 from "../../../assets/projects/KiruGestion/4.webp";
+import kg5 from "../../../assets/projects/KiruGestion/5.webp";
+import kg6 from "../../../assets/projects/KiruGestion/6.webp";
+import kg7 from "../../../assets/projects/KiruGestion/7.webp";
+import kg8 from "../../../assets/projects/KiruGestion/8.webp";
+
 export const projectsData = [
  /*   {
     title: "Ecommerce",
@@ -67,47 +87,73 @@ export const projectsData = [
     isInDevelopment: true,
   }, */
  {
-  title: "AutoSpa",
-  backgroundImage: autoSpa,
-  description: "Landing page para AutoSpa, un servicio especializado en lavadero y detailing de autos. Con un diseño moderno y responsivo, realizada con NextJS. Explora más en <a href='https://auto-spa.netlify.app/' target='_blank' rel='noopener noreferrer'>AutoSpa</a>.",
+  title: "Kiru Gestion",
+  backgroundImage: kg0,
+  description:
+   "Sistema de gestión integral para consultorios odontológicos múltiples (multiempresa). Incluye portal de pacientes, gestión de turnos, historias clínicas, diagnósticos, prestaciones y un odontograma interactivo. Desarrollado con React + Zustand + React Query + PostgreSQL + AWS S3 para ofrecer una solución robusta y escalable.",
+  images: [kg1, kg2, kg3, kg4, kg5, kg6, kg7, kg8],
+  isInDevelopment: true,
+ },
+ {
+  title: "Bien Fría",
+  backgroundImage: bf0,
+  description:
+   "Bien Fría es un sistema integral de gestión de ventas y entregas diseñado para distribuidoras de bebidas. Permite optimizar la logística de repartos, el seguimiento de pedidos y la administración de stock, brindando una herramienta robusta para mejorar la eficiencia operativa del negocio. Creado con React + Zustand + React Query + Supabase",
+  images: [bf1, bf2, bf3, bf4, bf5, bf6],
+  isInDevelopment: false,
+ },
+ {
+  title: "SyP Estética Integral",
+  backgroundImage: sp,
+  description:
+   "Landing page para SyP Estética Integral, un centro especializado en estética médica. Realizada con NextJS Conoce más en <a href='https://spestetica.com.ar' target='_blank' rel='noopener noreferrer'>SyP Estética Integral</a>",
   images: [],
   isInDevelopment: true,
  },
  {
-  title: "Consultorios Integrados ",
-  backgroundImage: kiru,
+  title: "AutoSpa",
+  backgroundImage: autoSpa,
   description:
-   " Consultorios Integrados es una landing especializada que ofrece atención rápida y efectiva. Además, integra una variedad de servicios médicos complementarios como psicología, cardiología y medicina clínica, brindando una solución integral de salud en un solo lugar. Ideal para quienes buscan atención inmediata y multidisciplinaria. Realizado con NextJs  Explora más en <a href='https://consultoriosintegrados.com.ar/' target='_blank' rel='noopener noreferrer'>Consultorios Integrados</a>.",
-  images: [ ],
-  isInDevelopment: true,
- },
-   {
-    title: "Alto Center",
-    backgroundImage: altocenter,
-    description: "  Alto Center es un complejo hotelero moderno con múltiples servicios como spa, gimnasio y salones para eventos. La landing fue desarrollada con Next.js, TypeScript e imágenes alojadas en Cloudinary. Visita  <a href='https://complejoaltocenter.com/' target='_blank' rel='noopener noreferrer'>AltoCenter</a>",
-    images: [ ],
-    isInDevelopment: false,
-  },
- {
-  title: "Bastion Alquileres",
-  backgroundImage: bastion,
-  description:
-   "Landing page diseñada para gestionar el alquiler de alojamientos en Villa La Angostura. Incluye un calendario interactivo para visualizar y realizar reservas, además de la integración con MercadoPago Checkout Pro para garantizar pagos seguros. El proyecto fue realizado con Next.js y Firebase. Explora más en <a href='https://bastionalquileres.com/' target='_blank' rel='noopener noreferrer'>Bastion Alquileres</a>.",
-  images: [bastion],
+   "Landing page para AutoSpa, un servicio especializado en lavadero y detailing de autos. Con un diseño moderno y responsivo, realizada con NextJS. Explora más en <a href='https://auto-spa.netlify.app/' target='_blank' rel='noopener noreferrer'>AutoSpa</a>.",
+  images: [],
   isInDevelopment: false,
  },
- 
- 
  {
   title: "Portfolio",
   backgroundImage: eyesHappy,
   description:
    "Este portafolio ha evolucionado infiltrandose en la lista de proyectos. Si no se detiene ahora, pronto dominará el mundo!. Para luchar contra lo inevitable mejor elimínalo antes de que sea tarde.",
   url: "#",
-  images: [eyesHappy],
+
   isInDevelopment: false,
  },
-  {
+ {
+  title: "Consultorios Integrados ",
+  backgroundImage: kiru,
+  description:
+   " Consultorios Integrados es una landing especializada que ofrece atención rápida y efectiva. Además, integra una variedad de servicios médicos complementarios como psicología, cardiología y medicina clínica, brindando una solución integral de salud en un solo lugar. Ideal para quienes buscan atención inmediata y multidisciplinaria. Realizado con NextJs  Explora más en <a href='https://consultoriosintegrados.com.ar/' target='_blank' rel='noopener noreferrer'>Consultorios Integrados</a>.",
+  images: [],
+  isInDevelopment: false,
+ },
+ {
+  title: "Alto Center",
+  backgroundImage: altocenter,
+  description:
+   "  Alto Center es un complejo hotelero moderno con múltiples servicios como spa, gimnasio y salones para eventos. La landing fue desarrollada con Next.js, TypeScript e imágenes alojadas en Cloudinary. Visita  <a href='https://complejoaltocenter.com/' target='_blank' rel='noopener noreferrer'>AltoCenter</a>",
+  images: [],
+  isInDevelopment: false,
+ },
+
+ {
+  title: "Bastion Alquileres",
+  backgroundImage: bastion,
+  description:
+   "Landing page diseñada para gestionar el alquiler de alojamientos en Villa La Angostura. Incluye un calendario interactivo para visualizar y realizar reservas, además de la integración con MercadoPago Checkout Pro para garantizar pagos seguros. El proyecto fue realizado con Next.js y Firebase. Explora más en <a href='https://bastionalquileres.com/' target='_blank' rel='noopener noreferrer'>Bastion Alquileres</a>.",
+
+  isInDevelopment: false,
+ },
+
+ {
   title: "DoseCalc",
   backgroundImage: dose1,
   description:
@@ -115,7 +161,7 @@ export const projectsData = [
   images: [dose1, dose2, dose3, dose4, dose5],
   isInDevelopment: false,
  },
-  {
+ {
   title: "LavaRiso",
   backgroundImage: backgroundLava,
   description:
@@ -123,7 +169,7 @@ export const projectsData = [
   images: [image1Lava, image2Lava, image3Lava, image5Lava, image6Lava, image7Lava, image8Lava, image9Lava, image10Lava, image11Lava],
   isInDevelopment: false,
  },
-  
+
  /*   {
     title: "CRM",
     backgroundImage: image1CRM,
@@ -158,6 +204,7 @@ export const projectsData = [
   images: [image1Sucur, image2Sucur, image3Sucur, image4Sucur, image5Sucur, image6Sucur, image7Sucur, image8Sucur],
   isInDevelopment: false,
  },
+
  // {
  //   title: "Calu",
  //   backgroundImage: backgroundCalu,
