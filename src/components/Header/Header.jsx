@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './header.css';  
-import benelli from "../../assets/projects/benelli.webp";
+import profileImage from "../../assets/projects/1.webp";
 import deletedPortfolioImg from "../../assets/projects/eyes-happy.webp";  
 
 const Header = () => {
@@ -54,7 +54,7 @@ const Header = () => {
     <header className="header">
       <div className="logo">
         <img
-          src={isPortfolioDeleted ? deletedPortfolioImg : benelli}  
+          src={isPortfolioDeleted ? deletedPortfolioImg : profileImage}  
           alt="Profile"
           className="profile-img"
         />

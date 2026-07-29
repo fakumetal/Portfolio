@@ -10,10 +10,9 @@
  
   }
   
-  button {
+  .game button {
     width: 100px;  
     height: 50px; 
-     
   }
   .impossible-mode-button {
     position: absolute;

@@ -1,181 +1,331 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import "./projectModal.css";
 
+const extractLink = (html = "") => {
+  const match = html.match(/href=['"]([^'"]+)['"]/);
+  return match ? match[1] : null;
+};
+
 const ProjectModal = ({ project, onClose, onDelete }) => {
- /* State */
- const [showModal, setShowModal] = useState(false);
- const [showImageModal, setShowImageModal] = useState(false);
- const [showConfirmModal, setShowConfirmModal] = useState(false);
- const [currentIndex, setCurrentIndex] = useState(0);
- const [direction, setDirection] = useState("right");
+  const [showModal, setShowModal] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState("right");
 
- useEffect(() => {
-  setShowModal(true);
- }, []);
+  const projectLink = extractLink(project?.description);
+  const isLogo = Boolean(project?.isLogo);
+  const hasGallery = Boolean(project?.images?.length);
+  const coverImage = hasGallery
+    ? project.images[0]
+    : project?.backgroundImage;
 
- /* Handlers */
- const handleClose = () => {
-  setShowModal(false);
-  setTimeout(onClose, 400);
- };
+  useEffect(() => {
+    requestAnimationFrame(() => setShowModal(true));
+  }, []);
 
- const handleDelete = () => {
-  setShowConfirmModal(true);
- };
+  const handleClose = useCallback(() => {
+    setShowModal(false);
+    setTimeout(onClose, 320);
+  }, [onClose]);
 
- const confirmDelete = () => {
-  onDelete(project.title);
-  setShowConfirmModal(false);
- };
+  const handleDelete = () => setShowConfirmModal(true);
 
- const openImageModal = (index) => {
-  setCurrentIndex(index);
-  setShowImageModal(true);
- };
-
- const closeImageModal = () => {
-  setShowImageModal(false);
- };
-
- const nextImage = () => {
-  setDirection("right");
-  setCurrentIndex((prevIndex) => (prevIndex + 1) % project.images.length);
- };
-
- const prevImage = () => {
-  setDirection("left");
-  setCurrentIndex((prevIndex) => (prevIndex - 1 + project.images.length) % project.images.length);
- };
-
- /* Keyboard Navigation */
- useEffect(() => {
-  const handleKeydown = (event) => {
-   if (showImageModal) {
-    if (event.key === "ArrowRight") {
-     nextImage();
-    } else if (event.key === "ArrowLeft") {
-     prevImage();
-    } else if (event.key === "Escape") {
-     closeImageModal();
-    }
-   } else if (event.key === "Escape") {
-    handleClose();
-   }
+  const confirmDelete = () => {
+    setShowConfirmModal(false);
+    onDelete();
   };
 
-  window.addEventListener("keydown", handleKeydown);
-
-  return () => {
-   window.removeEventListener("keydown", handleKeydown);
+  const openImageModal = (index) => {
+    setCurrentIndex(index);
+    setShowImageModal(true);
   };
- }, [showImageModal]);
 
- if (!project) return null;
+  const closeImageModal = () => setShowImageModal(false);
 
- const thumbnailClass = project.title === "Portfolio" ? "portfolio-thumbnail" : "";
+  const nextImage = useCallback(() => {
+    if (!project?.images?.length) return;
+    setDirection("right");
+    setCurrentIndex((prev) => (prev + 1) % project.images.length);
+  }, [project]);
 
- return (
-  <>
-   <div className={`modal-overlay ${showModal ? "show" : ""}`} onClick={handleClose}>
-    <div className='modal-content' onClick={(e) => e.stopPropagation()}>
-     <button className='modal-close-btn' onClick={handleClose}>
-      &times;
-     </button>
+  const prevImage = useCallback(() => {
+    if (!project?.images?.length) return;
+    setDirection("left");
+    setCurrentIndex(
+      (prev) => (prev - 1 + project.images.length) % project.images.length
+    );
+  }, [project]);
 
-     <div className='modal-header'>
-      <h2>{project.title}</h2>
-     </div>
+  useEffect(() => {
+    const handleKeydown = (event) => {
+      if (showImageModal) {
+        if (event.key === "ArrowRight") nextImage();
+        else if (event.key === "ArrowLeft") prevImage();
+        else if (event.key === "Escape") closeImageModal();
+      } else if (event.key === "Escape") {
+        if (showConfirmModal) setShowConfirmModal(false);
+        else handleClose();
+      }
+    };
 
-     <div className='modal-body'>
-      {/* Main Image */}
-      <div className='main-image-section'>
-       <div className='main-image-container' onClick={() => project.images && project.images.length > 0 && openImageModal(0)}>
-        <img src={project.backgroundImage || (project.images && project.images[0])} alt={project.title} className='modal-main-image' />
-       </div>
-      </div>
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [showImageModal, showConfirmModal, handleClose, nextImage, prevImage]);
 
-      {/* Description */}
-      <div className='description-section'>
-       <div className='project-description'>
-        <p dangerouslySetInnerHTML={{ __html: project.description }} />
-       </div>
-      </div>
+  if (!project) return null;
 
-      {/* Gallery */}
-      {project.images && project.images.length > 0 && (
-       <div className='gallery-section'>
-        <h3>Galería</h3>
-        <div className='thumbnails-container'>
-         {project.images.slice(0, 5).map((image, index) => (
-          <img key={index} src={image} alt={`Miniatura ${index + 1}`} className={`thumbnail ${thumbnailClass}`} onClick={() => openImageModal(index)} />
-         ))}
-         {project.images.length > 5 && (
-          <div className='more-images-indicator' onClick={() => openImageModal(5)}>
-           +{project.images.length - 5}
+  const modalTree = (
+    <>
+      <div
+        className={`modal-overlay ${showModal ? "show" : ""}`}
+        onClick={handleClose}
+        role="presentation"
+      >
+        <div
+          className={`modal-content ${isLogo ? "is-logo" : ""}`}
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-modal-title"
+        >
+          <button
+            type="button"
+            className="modal-close-btn"
+            onClick={handleClose}
+            aria-label="Cerrar"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 6L6 18M6 6l12 12"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+
+          <div className="modal-body">
+            <div className={`modal-hero ${isLogo ? "is-logo" : ""}`}>
+              {isLogo ? (
+                <div className="logo-showcase">
+                  <div className="logo-glow" aria-hidden="true" />
+                  <div className="logo-frame">
+                    <img
+                      src={project.backgroundImage}
+                      alt={project.title}
+                      className="modal-logo-image"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="main-image-container"
+                  onClick={() => hasGallery && openImageModal(0)}
+                  disabled={!hasGallery}
+                  aria-label={hasGallery ? "Ampliar imagen" : undefined}
+                >
+                  <img
+                    src={coverImage}
+                    alt={project.title}
+                    className="modal-main-image"
+                  />
+                  {hasGallery && (
+                    <span className="image-zoom-hint">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+                        <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M11 8v6M8 11h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                  )}
+                </button>
+              )}
+            </div>
+
+            <div className="modal-info">
+              <header className="modal-header">
+                <div className="modal-title-row">
+                  <h2 id="project-modal-title">{project.title}</h2>
+                  {project.isInDevelopment && (
+                    <span className="modal-status">En desarrollo</span>
+                  )}
+                </div>
+              </header>
+
+              <div className="project-description">
+                <p dangerouslySetInnerHTML={{ __html: project.description }} />
+              </div>
+
+              <div className="modal-actions">
+                {projectLink && (
+                  <a
+                    href={projectLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link-btn"
+                  >
+                    Visitar sitio
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M7 17L17 7M17 7H9M17 7v8"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                )}
+
+                {hasGallery && (
+                  <button
+                    type="button"
+                    className="gallery-open-btn"
+                    onClick={() => openImageModal(0)}
+                  >
+                    Ver galería
+                  </button>
+                )}
+              </div>
+
+              {hasGallery && (
+                <div className="gallery-section">
+                  <h3>Galería</h3>
+                  <div className="thumbnails-container">
+                    {project.images.slice(0, 6).map((image, index) => (
+                      <button
+                        type="button"
+                        key={index}
+                        className="thumbnail-btn"
+                        onClick={() => openImageModal(index)}
+                        aria-label={`Imagen ${index + 1}`}
+                      >
+                        <img src={image} alt="" className="thumbnail" />
+                      </button>
+                    ))}
+                    {project.images.length > 6 && (
+                      <button
+                        type="button"
+                        className="more-images-indicator"
+                        onClick={() => openImageModal(6)}
+                      >
+                        +{project.images.length - 6}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {project.title === "Portfolio" && (
+                <div className="portfolio-actions">
+                  <button
+                    type="button"
+                    className="delete-btn"
+                    onClick={handleDelete}
+                    title="Eliminar Portfolio"
+                  >
+                    <img src="./skull.svg" alt="" />
+                    <span>Eliminar</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-         )}
         </div>
-       </div>
+      </div>
+
+      {showConfirmModal && (
+        <div className="confirm-modal-overlay" role="presentation">
+          <div
+            className="confirm-modal-content"
+            role="alertdialog"
+            aria-labelledby="confirm-title"
+          >
+            <h3 id="confirm-title">¿Eliminar el portafolio?</h3>
+            <p>Esta acción no se puede deshacer.</p>
+            <div className="confirm-modal-actions">
+              <button
+                type="button"
+                className="btn-cancel"
+                onClick={() => setShowConfirmModal(false)}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn-confirm"
+                onClick={confirmDelete}
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
-      {project.title === "Portfolio" && (
-       <div className='portfolio-actions'>
-        <button className='delete-btn' onClick={handleDelete} title='Eliminar Portfolio'>
-         <img src='./skull.svg' alt='skull' />
-        </button>
-       </div>
-      )}
-     </div>
-    </div>
-   </div>
+      {showImageModal && (
+        <div
+          className="image-modal-overlay"
+          onClick={closeImageModal}
+          role="presentation"
+        >
+          <div
+            className="image-modal-content"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Galería de imágenes"
+          >
+            <button
+              type="button"
+              className="image-modal-close"
+              onClick={closeImageModal}
+              aria-label="Cerrar galería"
+            >
+              &times;
+            </button>
 
-   {/* Confirm */}
-   {showConfirmModal && (
-    <div className='confirm-modal-overlay'>
-     <div className='confirm-modal-content'>
-      <h3>¿Estás seguro de que deseas eliminar el portafolio?</h3>
-      <p>Esta acción no se puede deshacer.</p>
-      <div className='confirm-modal-actions'>
-       <button className='btn-cancel' onClick={() => setShowConfirmModal(false)}>
-        Cancelar
-       </button>
-       <button className='btn-confirm' onClick={confirmDelete}>
-        Eliminar
-       </button>
-      </div>
-     </div>
-    </div>
-   )}
+            <div className="carousel-container">
+              <button
+                type="button"
+                className="carousel-control prev"
+                onClick={prevImage}
+                aria-label="Anterior"
+              >
+                <img src="./left.svg" alt="" width="28" height="28" />
+              </button>
 
-   {/* Gallery Modal - Slide Effect */}
-   {showImageModal && (
-    <div className='image-modal-overlay' onClick={closeImageModal}>
-     <div className='image-modal-content' onClick={(e) => e.stopPropagation()}>
-      <button className='image-modal-close' onClick={closeImageModal}>
-       &times;
-      </button>
+              <div className="carousel-image-wrapper">
+                <img
+                  key={currentIndex}
+                  src={project.images[currentIndex]}
+                  alt={`Imagen ${currentIndex + 1}`}
+                  className={`carousel-image slide-${direction}`}
+                />
+                <div className="carousel-counter">
+                  {currentIndex + 1} / {project.images.length}
+                </div>
+              </div>
 
-      <div className='carousel-container'>
-       <button className='carousel-control prev' onClick={prevImage}>
-        <img style={{ width: "30px", filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.8))" }} src='./left.svg' alt='Left' />
-       </button>
-
-       <div className='carousel-image-wrapper'>
-        <img key={currentIndex} src={project.images[currentIndex]} alt={`Imagen ${currentIndex + 1}`} className={`carousel-image slide-${direction}`} />
-        <div className='carousel-counter'>
-         {currentIndex + 1} / {project.images.length}
+              <button
+                type="button"
+                className="carousel-control next"
+                onClick={nextImage}
+                aria-label="Siguiente"
+              >
+                <img src="./right.svg" alt="" width="28" height="28" />
+              </button>
+            </div>
+          </div>
         </div>
-       </div>
+      )}
+    </>
+  );
 
-       <button className='carousel-control next' onClick={nextImage}>
-        <img style={{ width: "30px", filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.8))" }} src='./right.svg' alt='Right' />
-       </button>
-      </div>
-     </div>
-    </div>
-   )}
-  </>
- );
+  return createPortal(modalTree, document.body);
 };
 
 export default ProjectModal;

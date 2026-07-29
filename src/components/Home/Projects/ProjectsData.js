@@ -44,7 +44,17 @@ import image4CRM from "../../../assets/projects/CRM/4.webp"; */
 
 import eyesHappy from "../../../assets/projects/eyes-happy.webp";
 
-import bastion from "../../../assets/projects/bastion.ico";
+import wodcoreLogo from "../../../assets/projects/Wodcore/logo-wodcore.png";
+import wodcore1 from "../../../assets/projects/Wodcore/1.webp";
+import wodcore2 from "../../../assets/projects/Wodcore/2.webp";
+import wodcore3 from "../../../assets/projects/Wodcore/3.webp";
+import wodcore4 from "../../../assets/projects/Wodcore/4.webp";
+import wodcore5 from "../../../assets/projects/Wodcore/5.webp";
+import wodcore6 from "../../../assets/projects/Wodcore/6.webp";
+import wodcore7 from "../../../assets/projects/Wodcore/7.webp";
+import wodcore8 from "../../../assets/projects/Wodcore/8.webp";
+import wodcore9 from "../../../assets/projects/Wodcore/9.webp";
+import wodcore10 from "../../../assets/projects/Wodcore/10.webp";
 import kiru from "../../../assets/projects/Kiru/kiru-logo.png";
 import altocenter from "../../../assets/projects/AltoCenter/altocenter.png";
 /* 
@@ -57,7 +67,18 @@ import image6Ec from "../../../assets/projects/ecommerce/6.webp";
 import image7Ec from "../../../assets/projects/ecommerce/7.webp";
 import image8Ec from "../../../assets/projects/ecommerce/8.webp";
 import image9Ec from "../../../assets/projects/ecommerce/9.webp"; */
-import autoSpa from "../../../assets/projects/AutoSpa/autoSpa.webp";
+import uribaSaludLogo from "../../../assets/projects/UribaSalud/logo_100.webp";
+import uribaSalud1 from "../../../assets/projects/UribaSalud/1.webp";
+import uribaSalud2 from "../../../assets/projects/UribaSalud/2.webp";
+import uribaSalud3 from "../../../assets/projects/UribaSalud/3.webp";
+import uribaSalud4 from "../../../assets/projects/UribaSalud/4.webp";
+import uribaSalud5 from "../../../assets/projects/UribaSalud/5.webp";
+import uribaSalud6 from "../../../assets/projects/UribaSalud/6.webp";
+import uribaSalud7 from "../../../assets/projects/UribaSalud/7.webp";
+import uribaSalud8 from "../../../assets/projects/UribaSalud/8.webp";
+import uribaSalud9 from "../../../assets/projects/UribaSalud/9.webp";
+import uribaSalud10 from "../../../assets/projects/UribaSalud/10.webp";
+import uribaSalud11 from "../../../assets/projects/UribaSalud/11.webp";
 import sp from "../../../assets/projects/SyP/sp-logo.png";
 
 import bf0 from "../../../assets/projects/BienFria/0.webp";
@@ -87,12 +108,13 @@ export const projectsData = [
     isInDevelopment: true,
   }, */
  {
-  title: "Kiru Gestion",
-  backgroundImage: kg0,
+  title: "UribaSalud",
+  backgroundImage: uribaSaludLogo,
   description:
-   "Sistema de gestión integral para consultorios odontológicos múltiples (multiempresa). Incluye portal de pacientes, gestión de turnos, historias clínicas, diagnósticos, prestaciones y un odontograma interactivo. Desarrollado con React + Zustand + React Query + PostgreSQL + AWS S3 para ofrecer una solución robusta y escalable.",
-  images: [kg1, kg2, kg3, kg4, kg5, kg6, kg7, kg8],
-  isInDevelopment: true,
+   "Gestión clínica, operativa y administrativa; gestión de pacientes, profesionales, prestaciones y visitas; aplicación móvil para profesionales con validación mediante geofencing y firma digital; score NEWS2; historia clínica integrada; trazabilidad de acciones; documentación asistencial y procesos de facturación. Participación integral en el diseño de producto, definición de flujos, desarrollo frontend, modelado funcional, integraciones y arquitectura general de la solución. Explora más en <a href='https://www.uribasalud.com/' target='_blank' rel='noopener noreferrer'>UribaSalud</a>.",
+  images: [uribaSalud1, uribaSalud2, uribaSalud3, uribaSalud4, uribaSalud5, uribaSalud6, uribaSalud7, uribaSalud8, uribaSalud9, uribaSalud10, uribaSalud11],
+  isInDevelopment: false,
+  isLogo: true,
  },
  {
   title: "Bien Fría",
@@ -103,20 +125,21 @@ export const projectsData = [
   isInDevelopment: false,
  },
  {
-  title: "SyP Estética Integral",
-  backgroundImage: sp,
+  title: "Wodcore",
+  backgroundImage: wodcoreLogo,
   description:
-   "Landing page para SyP Estética Integral, un centro especializado en estética médica. Realizada con NextJS Conoce más en <a href='https://spestetica.com.ar' target='_blank' rel='noopener noreferrer'>SyP Estética Integral</a>",
-  images: [],
-  isInDevelopment: true,
+   "Plataforma SaaS multi-tenant para gestión integral de boxes y centros de entrenamiento. Incluye aplicación móvil para alumnos y panel administrativo, con reservas de clases, control de cupos y planes, publicación de WODs, pagos con Mercado Pago, notificaciones push, encuestas, seguimiento de progreso y gestión de múltiples sedes. Desarrollada con React, React Native, Node.js, TypeScript, PostgreSQL, Redis, AWS S3 y arquitectura API-first, con foco en seguridad, escalabilidad, rendimiento y experiencia de usuario.",
+  images: [wodcore1, wodcore2, wodcore3, wodcore4, wodcore5, wodcore6, wodcore7, wodcore8, wodcore9, wodcore10],
+  isInDevelopment: false,
+  isLogo: true,
  },
  {
-  title: "AutoSpa",
-  backgroundImage: autoSpa,
+  title: "Kiru Gestion",
+  backgroundImage: kg0,
   description:
-   "Landing page para AutoSpa, un servicio especializado en lavadero y detailing de autos. Con un diseño moderno y responsivo, realizada con NextJS. Explora más en <a href='https://auto-spa.netlify.app/' target='_blank' rel='noopener noreferrer'>AutoSpa</a>.",
-  images: [],
-  isInDevelopment: false,
+   "Sistema de gestión integral para consultorios odontológicos múltiples (multiempresa). Incluye portal de pacientes, gestión de turnos, historias clínicas, diagnósticos, prestaciones y un odontograma interactivo. Desarrollado con React + Zustand + React Query + PostgreSQL + AWS S3 para ofrecer una solución robusta y escalable.",
+  images: [kg1, kg2, kg3, kg4, kg5, kg6, kg7, kg8],
+  isInDevelopment: true,
  },
  {
   title: "Portfolio",
@@ -124,7 +147,6 @@ export const projectsData = [
   description:
    "Este portafolio ha evolucionado infiltrandose en la lista de proyectos. Si no se detiene ahora, pronto dominará el mundo!. Para luchar contra lo inevitable mejor elimínalo antes de que sea tarde.",
   url: "#",
-
   isInDevelopment: false,
  },
  {
@@ -134,6 +156,7 @@ export const projectsData = [
    " Consultorios Integrados es una landing especializada que ofrece atención rápida y efectiva. Además, integra una variedad de servicios médicos complementarios como psicología, cardiología y medicina clínica, brindando una solución integral de salud en un solo lugar. Ideal para quienes buscan atención inmediata y multidisciplinaria. Realizado con NextJs  Explora más en <a href='https://consultoriosintegrados.com.ar/' target='_blank' rel='noopener noreferrer'>Consultorios Integrados</a>.",
   images: [],
   isInDevelopment: false,
+  isLogo: true,
  },
  {
   title: "Alto Center",
@@ -142,15 +165,17 @@ export const projectsData = [
    "  Alto Center es un complejo hotelero moderno con múltiples servicios como spa, gimnasio y salones para eventos. La landing fue desarrollada con Next.js, TypeScript e imágenes alojadas en Cloudinary. Visita  <a href='https://complejoaltocenter.com/' target='_blank' rel='noopener noreferrer'>AltoCenter</a>",
   images: [],
   isInDevelopment: false,
+  isLogo: true,
  },
 
  {
-  title: "Bastion Alquileres",
-  backgroundImage: bastion,
+  title: "SyP Estética Integral",
+  backgroundImage: sp,
   description:
-   "Landing page diseñada para gestionar el alquiler de alojamientos en Villa La Angostura. Incluye un calendario interactivo para visualizar y realizar reservas, además de la integración con MercadoPago Checkout Pro para garantizar pagos seguros. El proyecto fue realizado con Next.js y Firebase. Explora más en <a href='https://bastionalquileres.com/' target='_blank' rel='noopener noreferrer'>Bastion Alquileres</a>.",
-
-  isInDevelopment: false,
+   "Landing page para SyP Estética Integral, un centro especializado en estética médica. Realizada con NextJS Conoce más en <a href='https://spestetica.com.ar' target='_blank' rel='noopener noreferrer'>SyP Estética Integral</a>",
+  images: [],
+  isInDevelopment: true,
+  isLogo: true,
  },
 
  {

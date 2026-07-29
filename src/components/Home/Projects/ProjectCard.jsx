@@ -1,31 +1,71 @@
-import React from 'react';
-import './projectCard.css'; 
+import "./projectCard.css";
 
-const ProjectCard = ({ title, backgroundImage, isInDevelopment }) => {
-  const cardStyle = {
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'auto 220px',    // La imagen se ajustará sin recortarse, pero puede dejar espacios vacíos
-    backgroundPosition: 'center',
-    width: '300px',
-    height: '220px',
+const ProjectCard = ({
+  title,
+  backgroundImage,
+  isInDevelopment,
+  isLogo = false,
+  index = 0,
+  onClick,
+}) => {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onClick?.();
+    }
   };
-  
-  
+
   return (
-    <div className="project-card" style={cardStyle}>
-      <div className="project-card-overlay"></div>
-      <h3 className="project-card-title">{title}</h3>
-      {isInDevelopment && (
-        <div className="project-card-status">
-          <span>En desarrollo</span>
-        </div>
-      )}
-      <div className="project-card-hover">
-        <span>Ver más</span>
-        
+    <article
+      className={`project-card ${isLogo ? "is-logo" : ""}`}
+      style={{ "--stagger": `${Math.min(index, 8) * 55}ms` }}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={`Abrir ${title}`}
+    >
+      <div className="project-card-media">
+        {isLogo ? (
+          <div className="project-card-logo-panel">
+            <img
+              src={backgroundImage}
+              alt=""
+              className="project-card-image"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          <img
+            src={backgroundImage}
+            alt=""
+            className="project-card-image"
+            loading="lazy"
+          />
+        )}
+        <div className="project-card-gradient" aria-hidden="true" />
       </div>
-    </div>
+
+      {isInDevelopment && (
+        <span className="project-card-badge">En desarrollo</span>
+      )}
+
+      <div className="project-card-content">
+        <h3 className="project-card-title">{title}</h3>
+        <span className="project-card-cta">
+          Ver proyecto
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+    </article>
   );
 };
 

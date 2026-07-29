@@ -1,25 +1,26 @@
-import { useState, useEffect } from 'react';
-import ProjectCard from './ProjectCard';
-import ProjectModal from './ProjectModal';
-import './projects.css';
-import { projectsData } from './ProjectsData';
-import { usePortfolio } from './PortfolioContext';
-import eyes2 from '../../../assets/projects/eyes-angry.webp';
-
+import { useState, useEffect } from "react";
+import ProjectCard from "./ProjectCard";
+import ProjectModal from "./ProjectModal";
+import "./projects.css";
+import { projectsData } from "./ProjectsData";
+import { usePortfolio } from "./PortfolioContext";
+import eyes2 from "../../../assets/projects/eyes-angry.webp";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [hiddenProjects, setHiddenProjects] = useState([]);
   const [showAllProjects, setShowAllProjects] = useState(false);
 
-  const { isPortfolioDeleted, setIsPortfolioDeleted, updatePortfolioDeleteCount } = usePortfolio();
+  const {
+    isPortfolioDeleted,
+    setIsPortfolioDeleted,
+    updatePortfolioDeleteCount,
+  } = usePortfolio();
 
-  const modifiedProjectsData = projectsData.map(project => {
+  const modifiedProjectsData = projectsData.map((project) => {
     if (project.title === "Portfolio") {
       return {
         ...project,
-        title: isPortfolioDeleted ? "Portfolio" : "Portfolio",
-        backgroundImage: isPortfolioDeleted ? [eyes2] : project.backgroundImage,
+        backgroundImage: isPortfolioDeleted ? eyes2 : project.backgroundImage,
         description: isPortfolioDeleted
           ? "¿ Otra vez aquí ? Piensa bien en tu decisión y actúa con precaución. No te atrevas"
           : project.description,
@@ -29,37 +30,31 @@ const Projects = () => {
     return project;
   });
 
-
   const title = isPortfolioDeleted ? "..." : "Algunos proyectos";
+  const visibleProjects = showAllProjects
+    ? modifiedProjectsData
+    : modifiedProjectsData.slice(0, 9);
+
   const scrollToBanner = () => {
-    const bannerSection = document.getElementById('banner');
+    const bannerSection = document.getElementById("banner");
     if (bannerSection) {
-      bannerSection.scrollIntoView({ behavior: 'smooth' });
+      bannerSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
   const handleCardClick = (project) => {
     setSelectedProject(project);
   };
 
-  const handleDeleteProject = (projectTitle) => {
-    setHiddenProjects([...hiddenProjects, projectTitle]);
-
-    if (projectTitle === 'Portfolio' || projectTitle === 'Portfolio') {
-
-      localStorage.setItem('isPortfolioDeleted', 'true');
-
-
-      let deleteCount = parseInt(localStorage.getItem('portfolioDeleteCount'), 10) || 0;
-      deleteCount += 1;
-      updatePortfolioDeleteCount(deleteCount);
-
-      setIsPortfolioDeleted(true);
-      scrollToBanner();
-
-
-    }
-
+  /* Solo dispara el easter-egg / juego — no oculta el proyecto */
+  const handlePortfolioDelete = () => {
+    localStorage.setItem("isPortfolioDeleted", "true");
+    const deleteCount =
+      (parseInt(localStorage.getItem("portfolioDeleteCount"), 10) || 0) + 1;
+    updatePortfolioDeleteCount(deleteCount);
+    setIsPortfolioDeleted(true);
     setSelectedProject(null);
+    scrollToBanner();
   };
 
   const handleCloseModal = () => {
@@ -68,39 +63,57 @@ const Projects = () => {
 
   useEffect(() => {
     if (selectedProject) {
-      document.body.classList.add('no-scroll');
+      document.body.classList.add("no-scroll");
     } else {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove("no-scroll");
     }
+    return () => document.body.classList.remove("no-scroll");
   }, [selectedProject]);
 
   return (
     <section id="projects" className="projects">
-      <h2 className='project-title'>{title}</h2>
+      <div className="projects-heading">
+        <p className="projects-eyebrow">Trabajo seleccionado</p>
+        <h2 className="project-title">{title}</h2>
+      </div>
 
       <div className="projects-container">
-        {(showAllProjects ? modifiedProjectsData : modifiedProjectsData.slice(0, 9)).map((project, index) => (
-          <div
-            key={index}
+        {visibleProjects.map((project, index) => (
+          <ProjectCard
+            key={project.title}
+            title={project.title}
+            backgroundImage={project.backgroundImage}
+            isInDevelopment={project.isInDevelopment}
+            isLogo={project.isLogo}
+            index={index}
             onClick={() => handleCardClick(project)}
-            className={hiddenProjects.includes(project.title) ? 'hidden' : ''}
-          >
-            <ProjectCard
-              title={project.title}
-              backgroundImage={project.backgroundImage}
-              isInDevelopment={project.isInDevelopment}
-              onDelete={handleDeleteProject}
-            />
-          </div>
+          />
         ))}
       </div>
 
       {modifiedProjectsData.length > 9 && (
-        <button 
-          className="see-more-btn" 
+        <button
+          type="button"
+          className="see-more-btn"
           onClick={() => setShowAllProjects(!showAllProjects)}
         >
-          {showAllProjects ? 'Ver menos' : 'Ver más'}
+          <span>{showAllProjects ? "Ver menos" : "Ver más"}</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            className={showAllProjects ? "rotated" : ""}
+          >
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       )}
 
@@ -108,7 +121,7 @@ const Projects = () => {
         <ProjectModal
           project={selectedProject}
           onClose={handleCloseModal}
-          onDelete={handleDeleteProject}
+          onDelete={handlePortfolioDelete}
         />
       )}
     </section>

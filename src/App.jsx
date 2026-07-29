@@ -25,8 +25,8 @@ const App = () => {
   }, [portfolioDeleteCount]);
 
   const appStyle = {
-    backgroundColor: isPortfolioDeleted ? "black" : "#242424",
-    transition: "background-color 1s ease",
+    backgroundColor: isPortfolioDeleted ? "#000" : undefined,
+    transition: "background-color 1s var(--ease-out)",
   };
 
   return (
@@ -39,20 +39,19 @@ const App = () => {
             element={
               <TransitionGroup>
                 <CSSTransition
-                  nodeRef={nodeRef}  
-                  key={showGame ? 'game' : 'home'}
+                  nodeRef={nodeRef}
+                  key={showGame ? "game" : "home"}
                   timeout={1500}
                   classNames="fade"
                   unmountOnExit
                 >
-                  <div ref={nodeRef}>  
+                  <div ref={nodeRef}>
                     {showGame ? <Game /> : <Home />}
                   </div>
                 </CSSTransition>
               </TransitionGroup>
             }
           />
-          
         </Routes>
       </Router>
     </div>
