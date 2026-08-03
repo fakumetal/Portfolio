@@ -35,61 +35,89 @@ const es = {
     eyebrowDeleted: "Advertencia",
     title: "Perfil profesional",
     titleDeleted: "Sobre mi creador…",
+    signature: "Ingeniero orientado a producto. De punta a punta.",
     description:
-      "Full Stack Developer orientado a producto. Trabajo con React, Next.js, Vue 3, React Native, Node.js, NestJS y TypeScript para convertir necesidades operativas complejas en experiencias claras, APIs confiables y productos sostenibles. Participo de punta a punta: definición funcional, UX, arquitectura, infraestructura cloud y evolución en producción.",
+      "Convierto necesidades operativas complejas en experiencias claras, APIs confiables y productos sostenibles. Trabajo end-to-end: definición funcional, UX, arquitectura, cloud y evolución en producción.",
     descriptionDeleted:
       "Mi creador es Facundo Journade. Construye productos digitales con una extraña obsesión por esconder juegos dentro de su portfolio.",
     experienceEyebrow: "Experiencia actual",
     experienceRole: "Co-Founder & Full Stack Engineer",
-    experiencePeriod: "— 2026 / Actualidad",
+    experiencePeriod: "2026 — Actualidad",
     experienceBody:
-      "Desarrollo productos SaaS y soluciones a medida, desde la definición funcional hasta producción, trabajando en frontend, backend, arquitectura, infraestructura cloud e integración de IA.",
+      "En UribaSoft construyo productos SaaS y soluciones a medida, desde la idea hasta producción.",
+    experienceHighlights: [
+      "SaaS multi-tenant en producción (salud, training, gestión)",
+      "Arquitectura full stack: React, NestJS, PostgreSQL, cloud",
+      "Producto, UX e infraestructura en el mismo ciclo",
+    ],
     visitUribaSoft: "Visitar UribaSoft",
     stackEyebrow: "Stack",
-    skillsTitle: "Habilidades Técnicas",
+    skillsTitle: "Herramientas que uso",
+    stackLead:
+      "No es una lista genérica: es el stack que uso en productos reales.",
+    usedIn: "Usado en",
     skillGroups: [
       {
+        id: "frontend",
         label: "Frontend",
         skills: [
-          "React",
-          "Next.js",
-          "Vue 3",
-          "TypeScript",
-          "JavaScript",
-          "HTML",
-          "CSS",
-          "SCSS",
-          "Material-UI",
+          { name: "React", usedIn: "UribaSalud · WodCore · Bien Fría" },
+          { name: "Next.js", usedIn: "Alto Center · landings" },
+          { name: "Vue 3", usedIn: "Productos a medida" },
+          { name: "TypeScript", usedIn: "SaaS · APIs · mobile" },
+          { name: "JavaScript", usedIn: "Web apps" },
+          { name: "Vite", usedIn: "Portfolio · SPAs" },
+          { name: "HTML / CSS / SCSS", usedIn: "UI systems" },
+          { name: "Material-UI", usedIn: "Dashboards" },
         ],
       },
       {
+        id: "backend",
         label: "Backend",
         skills: [
-          "Node.js",
-          "NestJS",
-          "TypeScript",
-          "APIs seguras",
-          "Procesos asíncronos",
-          "Testing",
+          { name: "Node.js", usedIn: "APIs · servicios" },
+          { name: "NestJS", usedIn: "WodCore · UribaSalud" },
+          { name: "TypeScript", usedIn: "Backend tipado" },
+          { name: "APIs seguras", usedIn: "Auth · multi-tenant" },
+          { name: "Mercado Pago", usedIn: "WodCore Marketplace" },
+          { name: "Procesos asíncronos", usedIn: "Jobs · notificaciones" },
+          { name: "Testing", usedIn: "Calidad en producción" },
         ],
       },
       {
+        id: "mobile",
         label: "Mobile & Desktop",
-        skills: ["React Native", "Ionic", "Electron"],
+        skills: [
+          { name: "React Native", usedIn: "WodCore · DoseCalc · UribaSalud" },
+          { name: "Ionic", usedIn: "Apps híbridas" },
+          { name: "Electron", usedIn: "Desktop tools" },
+        ],
       },
       {
+        id: "data",
         label: "Bases de datos",
         skills: [
-          "PostgreSQL",
-          "Redis",
-          "Supabase",
-          "Modelado de datos",
-          "Multi-tenant",
+          { name: "PostgreSQL", usedIn: "SaaS multi-tenant" },
+          { name: "Redis", usedIn: "Cache · sesiones" },
+          { name: "Supabase", usedIn: "Bien Fría" },
+          { name: "Modelado de datos", usedIn: "Dominios complejos" },
+          { name: "Multi-tenant", usedIn: "UribaSalud · WodCore · Kiru" },
         ],
       },
       {
+        id: "cloud",
         label: "Cloud & DevOps",
-        skills: ["Railway", "Cloudflare", "AWS S3", "CI/CD", "GitHub Actions"],
+        skills: [
+          { name: "Railway", usedIn: "Deploy continuo" },
+          { name: "Vercel", usedIn: "Next.js · landings" },
+          { name: "Netlify", usedIn: "Sites · landings · proyectos" },
+          { name: "Docker", usedIn: "Contenedores · entornos" },
+          { name: "Cloudflare", usedIn: "Edge · DNS · assets" },
+          { name: "AWS S3", usedIn: "Archivos · imágenes clínicas" },
+          { name: "GitHub Pages", usedIn: "Portfolio" },
+          { name: "CI/CD", usedIn: "GitHub Actions" },
+          { name: "GitHub Actions", usedIn: "Pipelines" },
+        ],
       },
     ],
   },
@@ -111,17 +139,19 @@ const es = {
     duelContribution: "Pero esta vez no voy a quedarme quieto.",
     items: {
       uribasalud: {
+        tagline: "SaaS multi-tenant para internación domiciliaria.",
         description:
           "Plataforma SaaS multi-tenant para internación domiciliaria. Centraliza la gestión clínica, operativa y administrativa de pacientes, profesionales, prestaciones y visitas. Incluye app móvil para profesionales, geofencing, firma digital, NEWS2, historia clínica, trazabilidad, documentación y facturación.",
         contribution:
-          "Participación integral en producto, frontend, definición de flujos, integraciones y arquitectura.",
+          "Desarrollo integral de punta a punta: producto, UX, frontend, backend, arquitectura, integraciones, infraestructura y despliegue en producción.",
         technologies: ["SaaS", "Multi-tenant", "App móvil", "API-first"],
       },
       wodcore: {
+        tagline: "Plataforma para boxes y centros de entrenamiento.",
         description:
           "SaaS multi-tenant para boxes y centros de entrenamiento. Integra app móvil y panel administrativo para reservas, cupos, planes, WODs, pagos Marketplace con Mercado Pago, notificaciones push, encuestas, progreso y operación multi-sede.",
         contribution:
-          "Desarrollo de una plataforma orientada a producto, con foco en arquitectura, seguridad, rendimiento y experiencia de uso.",
+          "Desarrollo integral de punta a punta: producto, UX, app móvil, panel admin, backend, arquitectura, pagos, infraestructura y producción.",
         technologies: [
           "React",
           "React Native",
@@ -135,38 +165,59 @@ const es = {
         ],
       },
       kiruGestion: {
+        tagline: "Gestión integral para consultorios odontológicos.",
         description:
           "Sistema multi-tenant para consultorios odontológicos. Reúne pacientes, profesionales, turnos, prestaciones, historia clínica, odontograma, contabilidad e imágenes clínicas; también contempla radiografías, archivos STL con visor y portal de pacientes.",
+        contribution:
+          "Desarrollo integral de punta a punta: producto, UX, frontend, backend, modelado de datos, arquitectura multi-tenant e infraestructura.",
         technologies: ["Multi-tenant", "Historia clínica", "PostgreSQL", "AWS S3"],
       },
       bienFria: {
+        tagline: "Operaciones y trazabilidad para distribuidora.",
         description:
           "Sistema de gestión para distribuidora: productos, pedidos, entregas, stock, cuentas corrientes, reportes, clientes y trazabilidad por unidad de venta.",
+        contribution:
+          "Desarrollo integral de punta a punta: producto, UX, frontend, backend, datos operativos e infraestructura.",
         technologies: ["React", "Supabase", "Gestión operativa"],
       },
       portfolio: {
+        tagline: "Un portfolio con mente propia.",
         description:
           "Este portfolio se infiltró en la lista de proyectos. Si no se detiene ahora, pronto dominará el mundo.",
+        contribution:
+          "Diseño y desarrollo integral de punta a punta: experiencia, UI, animaciones, i18n e interacción.",
         technologies: ["React", "Easter egg"],
       },
       doseCalc: {
+        tagline: "Cálculo de dosis para enfermería.",
         description:
           "Aplicación móvil para apoyar el cálculo de dosis de medicamentos inyectables y conversiones de unidades en enfermería.",
+        contribution:
+          "Desarrollo integral de punta a punta: producto, UX y app móvil completa.",
         technologies: ["React Native"],
       },
       altoCenter: {
+        tagline: "Landing para complejo hotelero.",
         description:
           "Landing para un complejo hotelero, desarrollada con Next.js y TypeScript.",
+        contribution:
+          "Desarrollo integral de punta a punta: diseño, frontend, contenido y despliegue.",
         technologies: ["Next.js", "TypeScript"],
       },
       consultorios: {
+        tagline: "Landing de atención médica rápida.",
         description:
           "Landing especializada en atención médica rápida y servicios complementarios.",
+        contribution:
+          "Desarrollo integral de punta a punta: diseño, frontend, contenido y despliegue.",
         technologies: ["Next.js"],
       },
       syp: {
+        tagline: "Landing de estética médica.",
         description:
           "Landing para un centro especializado en estética médica.",
+        contribution:
+          "Desarrollo integral de punta a punta: diseño, frontend, contenido y despliegue.",
         technologies: ["Next.js"],
       },
     },
@@ -176,7 +227,10 @@ const es = {
     zoomImage: "Ampliar imagen",
     warningTitle: "El portfolio interviene",
     duelTitle: "El portfolio te desafía",
-    technologies: "Tecnologías y enfoque",
+    technologies: "Stack",
+    role: "Mi rol",
+    overview: "Overview",
+    live: "En producción",
     delete: "Eliminar",
     acceptDuel: "Aceptar el duelo",
     viewProject: "Ver proyecto",

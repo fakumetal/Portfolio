@@ -87,6 +87,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
           aria-modal="true"
           aria-labelledby="project-modal-title"
         >
+          <div className="modal-accent-line" aria-hidden="true" />
           <button
             type="button"
             className="modal-close-btn"
@@ -141,26 +142,46 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                   )}
                 </button>
               )}
+              {project.contribution && (
+                <div className="project-role">
+                  <p className="modal-section-label">{t("modal.role")}</p>
+                  <p>{project.contribution}</p>
+                </div>
+              )}
             </div>
 
             <div className="modal-info">
               <header className="modal-header">
+                <div className="modal-meta">
+                  {projectLink && !project.isPortfolio && (
+                    <span className="modal-live">
+                      <span className="modal-live-dot" aria-hidden="true" />
+                      {t("modal.live")}
+                    </span>
+                  )}
+                  {project.tagline && (
+                    <p className="modal-tagline">{project.tagline}</p>
+                  )}
+                </div>
                 <div className="modal-title-row">
                   <h2 id="project-modal-title">{modalTitle}</h2>
                 </div>
               </header>
 
               <div className="project-description">
+                <p className="modal-section-label">{t("modal.overview")}</p>
                 <p>{project.description}</p>
-                {project.contribution && <p className="project-contribution">{project.contribution}</p>}
               </div>
 
               {project.technologies?.length > 0 && (
-                <ul className="project-technologies" aria-label={t("modal.technologies")}>
-                  {project.technologies.map((technology) => (
-                    <li key={technology}>{technology}</li>
-                  ))}
-                </ul>
+                <div className="project-stack">
+                  <p className="modal-section-label">{t("modal.technologies")}</p>
+                  <ul className="project-technologies" aria-label={t("modal.technologies")}>
+                    {project.technologies.map((technology) => (
+                      <li key={technology}>{technology}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
 
               <div className="modal-actions">

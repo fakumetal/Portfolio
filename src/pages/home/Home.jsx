@@ -32,11 +32,11 @@ const Home = () => {
       <section id="perfil" ref={(el) => (sectionsRef.current[1] = el)} className="fade-in-section">
         <About />
       </section>
-      <section id="proceso" ref={(el) => (sectionsRef.current[2] = el)} className="fade-in-section">
-        <Process />
-      </section>
-      <section id="proyectos" ref={(el) => (sectionsRef.current[3] = el)} className="fade-in-section">
+      <section id="proyectos" ref={(el) => (sectionsRef.current[2] = el)} className="fade-in-section">
         <Projects />
+      </section>
+      <section id="proceso" ref={(el) => (sectionsRef.current[3] = el)} className="fade-in-section">
+        <Process />
       </section>
       <section id="contacto" ref={(el) => (sectionsRef.current[4] = el)} className="fade-in-section">
         <Contact />

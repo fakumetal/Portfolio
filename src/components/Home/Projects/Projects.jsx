@@ -20,6 +20,7 @@ const Projects = () => {
     const item = dict.projects.items[project.id] || {};
     return {
       ...project,
+      tagline: item.tagline,
       description: item.description,
       contribution: item.contribution,
       technologies: item.technologies,
@@ -80,16 +81,19 @@ const Projects = () => {
         <p>{isPortfolioDeleted ? t("projects.descriptionDeleted") : t("projects.description")}</p>
       </div>
       <div className="projects-container">
-        {featured.map((project, index) => (
-          <ProjectCard
-            key={project.id}
-            {...project}
-            backgroundImage={isPortfolioDeleted && project.isPortfolio ? eyesAngry : project.backgroundImage}
-            isCorrupted={isPortfolioDeleted && !project.isPortfolio}
-            index={index}
-            onClick={() => openProject(project)}
-          />
-        ))}
+        {featured.map((project, index) => {
+          const copy = withCopy(project);
+          return (
+            <ProjectCard
+              key={project.id}
+              {...copy}
+              backgroundImage={isPortfolioDeleted && project.isPortfolio ? eyesAngry : project.backgroundImage}
+              isCorrupted={isPortfolioDeleted && !project.isPortfolio}
+              index={index}
+              onClick={() => openProject(project)}
+            />
+          );
+        })}
       </div>
       {archive.length > 0 && (
         <>
@@ -98,15 +102,18 @@ const Projects = () => {
           </button>
           {showArchive && (
             <div className="projects-container projects-archive">
-              {archive.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  {...project}
-                  isCorrupted={isPortfolioDeleted}
-                  index={index}
-                  onClick={() => openProject(project)}
-                />
-              ))}
+              {archive.map((project, index) => {
+                const copy = withCopy(project);
+                return (
+                  <ProjectCard
+                    key={project.id}
+                    {...copy}
+                    isCorrupted={isPortfolioDeleted}
+                    index={index}
+                    onClick={() => openProject(project)}
+                  />
+                );
+              })}
             </div>
           )}
         </>

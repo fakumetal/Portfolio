@@ -36,9 +36,17 @@
   width: min(1120px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 1.5rem;
   align-items: start;
+}
+
+.projects-container .project-card {
+  grid-column: span 2;
+}
+
+.projects-container .project-card.is-wide {
+  grid-column: span 3;
 }
 
 .no-scroll {
@@ -111,6 +119,11 @@ button.see-more-btn:focus-visible {
 @media (max-width: 960px) {
   .projects-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects-container .project-card,
+  .projects-container .project-card.is-wide {
+    grid-column: span 1;
   }
 }
 

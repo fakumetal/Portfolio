@@ -5,14 +5,18 @@ import { useLanguage } from "../../../i18n/LanguageContext";
 
 const ProjectCard = ({
   title,
+  tagline,
+  technologies = [],
   backgroundImage,
   isLogo = false,
   isCorrupted = false,
+  wide = false,
   index = 0,
   onClick,
 }) => {
   const { t } = useLanguage();
   const tiltRef = useRef(null);
+  const chips = technologies.slice(0, 3);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -47,7 +51,7 @@ const ProjectCard = ({
 
   return (
     <article
-      className={`project-card ${isLogo ? "is-logo" : ""} ${isCorrupted ? "is-corrupted" : ""}`}
+      className={`project-card ${isLogo ? "is-logo" : ""} ${isCorrupted ? "is-corrupted" : ""} ${wide ? "is-wide" : ""}`}
       style={{ "--stagger": `${Math.min(index, 8) * 55}ms` }}
       onClick={onClick}
       onKeyDown={handleKeyDown}
@@ -82,6 +86,14 @@ const ProjectCard = ({
 
         <div className="project-card-content">
           <h3 className="project-card-title">{title}</h3>
+          {tagline && <p className="project-card-tagline">{tagline}</p>}
+          {chips.length > 0 && (
+            <ul className="project-card-chips" aria-label={t("modal.technologies")}>
+              {chips.map((tech) => (
+                <li key={tech}>{tech}</li>
+              ))}
+            </ul>
+          )}
           <span className="project-card-cta">
             {t("projects.viewProject")}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">

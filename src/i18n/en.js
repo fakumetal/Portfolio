@@ -35,61 +35,89 @@ const en = {
     eyebrowDeleted: "Warning",
     title: "Professional profile",
     titleDeleted: "About my creator…",
+    signature: "Product-minded engineer. End to end.",
     description:
-      "Product-minded Full Stack Developer. I work with React, Next.js, Vue 3, React Native, Node.js, NestJS, and TypeScript to turn complex operational needs into clear experiences, reliable APIs, and sustainable products. I work end to end: product definition, UX, architecture, cloud infrastructure, and production evolution.",
+      "I turn complex operational needs into clear experiences, reliable APIs, and sustainable products. I work end to end: product definition, UX, architecture, cloud, and production evolution.",
     descriptionDeleted:
       "My creator is Facundo Journade. He builds digital products with a strange obsession for hiding games inside his portfolio.",
     experienceEyebrow: "Current experience",
     experienceRole: "Co-Founder & Full Stack Engineer",
-    experiencePeriod: "— 2026 / Present",
+    experiencePeriod: "2026 — Present",
     experienceBody:
-      "I build SaaS products and custom solutions, from product definition to production, working across frontend, backend, architecture, cloud infrastructure, and AI integration.",
+      "At UribaSoft I build SaaS products and custom solutions, from idea to production.",
+    experienceHighlights: [
+      "Multi-tenant SaaS in production (health, training, ops)",
+      "Full-stack architecture: React, NestJS, PostgreSQL, cloud",
+      "Product, UX, and infrastructure in the same loop",
+    ],
     visitUribaSoft: "Visit UribaSoft",
     stackEyebrow: "Stack",
-    skillsTitle: "Technical skills",
+    skillsTitle: "Tools I use",
+    stackLead:
+      "Not a generic checklist — the stack I use on real products.",
+    usedIn: "Used in",
     skillGroups: [
       {
+        id: "frontend",
         label: "Frontend",
         skills: [
-          "React",
-          "Next.js",
-          "Vue 3",
-          "TypeScript",
-          "JavaScript",
-          "HTML",
-          "CSS",
-          "SCSS",
-          "Material-UI",
+          { name: "React", usedIn: "UribaSalud · WodCore · Bien Fría" },
+          { name: "Next.js", usedIn: "Alto Center · landings" },
+          { name: "Vue 3", usedIn: "Custom products" },
+          { name: "TypeScript", usedIn: "SaaS · APIs · mobile" },
+          { name: "JavaScript", usedIn: "Web apps" },
+          { name: "Vite", usedIn: "Portfolio · SPAs" },
+          { name: "HTML / CSS / SCSS", usedIn: "UI systems" },
+          { name: "Material-UI", usedIn: "Dashboards" },
         ],
       },
       {
+        id: "backend",
         label: "Backend",
         skills: [
-          "Node.js",
-          "NestJS",
-          "TypeScript",
-          "Secure APIs",
-          "Async processes",
-          "Testing",
+          { name: "Node.js", usedIn: "APIs · services" },
+          { name: "NestJS", usedIn: "WodCore · UribaSalud" },
+          { name: "TypeScript", usedIn: "Typed backends" },
+          { name: "Secure APIs", usedIn: "Auth · multi-tenant" },
+          { name: "Mercado Pago", usedIn: "WodCore Marketplace" },
+          { name: "Async processes", usedIn: "Jobs · notifications" },
+          { name: "Testing", usedIn: "Production quality" },
         ],
       },
       {
+        id: "mobile",
         label: "Mobile & Desktop",
-        skills: ["React Native", "Ionic", "Electron"],
+        skills: [
+          { name: "React Native", usedIn: "WodCore · DoseCalc · UribaSalud" },
+          { name: "Ionic", usedIn: "Hybrid apps" },
+          { name: "Electron", usedIn: "Desktop tools" },
+        ],
       },
       {
+        id: "data",
         label: "Databases",
         skills: [
-          "PostgreSQL",
-          "Redis",
-          "Supabase",
-          "Data modeling",
-          "Multi-tenant",
+          { name: "PostgreSQL", usedIn: "Multi-tenant SaaS" },
+          { name: "Redis", usedIn: "Cache · sessions" },
+          { name: "Supabase", usedIn: "Bien Fría" },
+          { name: "Data modeling", usedIn: "Complex domains" },
+          { name: "Multi-tenant", usedIn: "UribaSalud · WodCore · Kiru" },
         ],
       },
       {
+        id: "cloud",
         label: "Cloud & DevOps",
-        skills: ["Railway", "Cloudflare", "AWS S3", "CI/CD", "GitHub Actions"],
+        skills: [
+          { name: "Railway", usedIn: "Continuous deploy" },
+          { name: "Vercel", usedIn: "Next.js · landings" },
+          { name: "Netlify", usedIn: "Sites · landings · projects" },
+          { name: "Docker", usedIn: "Containers · environments" },
+          { name: "Cloudflare", usedIn: "Edge · DNS · assets" },
+          { name: "AWS S3", usedIn: "Files · clinical images" },
+          { name: "GitHub Pages", usedIn: "Portfolio" },
+          { name: "CI/CD", usedIn: "GitHub Actions" },
+          { name: "GitHub Actions", usedIn: "Pipelines" },
+        ],
       },
     ],
   },
@@ -111,17 +139,19 @@ const en = {
     duelContribution: "But this time I won't sit still.",
     items: {
       uribasalud: {
+        tagline: "Multi-tenant SaaS for home hospitalization.",
         description:
           "Multi-tenant SaaS platform for home hospitalization. Centralizes clinical, operational, and administrative management of patients, professionals, services, and visits. Includes a mobile app for professionals, geofencing, digital signature, NEWS2, clinical records, traceability, documentation, and billing.",
         contribution:
-          "End-to-end involvement in product, frontend, flow definition, integrations, and architecture.",
+          "End-to-end ownership: product, UX, frontend, backend, architecture, integrations, infrastructure, and production deployment.",
         technologies: ["SaaS", "Multi-tenant", "Mobile app", "API-first"],
       },
       wodcore: {
+        tagline: "Platform for gym boxes and training centers.",
         description:
           "Multi-tenant SaaS for gym boxes and training centers. Integrates a mobile app and admin panel for bookings, capacity, plans, WODs, Mercado Pago Marketplace payments, push notifications, surveys, progress tracking, and multi-location operations.",
         contribution:
-          "Product-oriented platform development, focused on architecture, security, performance, and user experience.",
+          "End-to-end ownership: product, UX, mobile app, admin panel, backend, architecture, payments, infrastructure, and production.",
         technologies: [
           "React",
           "React Native",
@@ -135,38 +165,59 @@ const en = {
         ],
       },
       kiruGestion: {
+        tagline: "End-to-end system for dental practices.",
         description:
           "Multi-tenant system for dental practices. Brings together patients, professionals, appointments, services, clinical records, odontogram, accounting, and clinical imaging; also covers X-rays, STL files with a viewer, and a patient portal.",
+        contribution:
+          "End-to-end ownership: product, UX, frontend, backend, data modeling, multi-tenant architecture, and infrastructure.",
         technologies: ["Multi-tenant", "Clinical records", "PostgreSQL", "AWS S3"],
       },
       bienFria: {
+        tagline: "Ops and traceability for a distributor.",
         description:
           "Management system for a distributor: products, orders, deliveries, stock, current accounts, reports, clients, and traceability per sales unit.",
+        contribution:
+          "End-to-end ownership: product, UX, frontend, backend, operational data, and infrastructure.",
         technologies: ["React", "Supabase", "Operations management"],
       },
       portfolio: {
+        tagline: "A portfolio with a mind of its own.",
         description:
           "This portfolio snuck into the project list. If it isn't stopped now, it will soon take over the world.",
+        contribution:
+          "End-to-end ownership: experience, UI, motion, i18n, and interaction design.",
         technologies: ["React", "Easter egg"],
       },
       doseCalc: {
+        tagline: "Dose calculation for nursing.",
         description:
           "Mobile app to support injectable medication dose calculations and unit conversions in nursing.",
+        contribution:
+          "End-to-end ownership: product, UX, and the full mobile app.",
         technologies: ["React Native"],
       },
       altoCenter: {
+        tagline: "Landing page for a hotel complex.",
         description:
           "Landing page for a hotel complex, built with Next.js and TypeScript.",
+        contribution:
+          "End-to-end ownership: design, frontend, content, and deployment.",
         technologies: ["Next.js", "TypeScript"],
       },
       consultorios: {
+        tagline: "Landing for fast medical care.",
         description:
           "Landing page specialized in fast medical care and complementary services.",
+        contribution:
+          "End-to-end ownership: design, frontend, content, and deployment.",
         technologies: ["Next.js"],
       },
       syp: {
+        tagline: "Landing for medical aesthetics.",
         description:
           "Landing page for a medical aesthetics center.",
+        contribution:
+          "End-to-end ownership: design, frontend, content, and deployment.",
         technologies: ["Next.js"],
       },
     },
@@ -176,7 +227,10 @@ const en = {
     zoomImage: "Enlarge image",
     warningTitle: "The portfolio intervenes",
     duelTitle: "The portfolio challenges you",
-    technologies: "Technologies and focus",
+    technologies: "Stack",
+    role: "My role",
+    overview: "Overview",
+    live: "Live",
     delete: "Delete",
     acceptDuel: "Accept the duel",
     viewProject: "View project",
