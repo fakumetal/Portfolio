@@ -1,23 +1,20 @@
- 
-import './contact.css';
+import "./contact.css";
+import { usePortfolio } from "../Projects/PortfolioContext";
+import { useLanguage } from "../../../i18n/LanguageContext";
+import cvFile from "../../../assets/CV_Facundo_Journade_2026.pdf";
 
 const Contact = () => {
+  const { isPortfolioDeleted } = usePortfolio();
+  const { t } = useLanguage();
   return (
-    <section className="contact-section">
-      <h2>Contacto</h2>
-      <p>¡Estoy disponible para trabajar en tu proyecto! No dudes en contactarme.</p>
-
+    <section className="contact-section" aria-labelledby="contact-title">
+      <p className="projects-eyebrow">{isPortfolioDeleted ? t("contact.eyebrowDeleted") : t("contact.eyebrow")}</p>
+      <h2 id="contact-title">{isPortfolioDeleted ? t("contact.titleDeleted") : t("contact.title")}</h2>
+      <p>{isPortfolioDeleted ? t("contact.descriptionDeleted") : t("contact.description")}</p>
       <div className="contact-info">
-        <a href="mailto:faku.metal@gmail.com" className="contact-item email">
-          <img style={{width:'30px'}} src="./mail.svg" alt="" />
-          <span>Mail</span>
-        </a>
-
-        <a href="https://wa.me/2664895193" className="contact-item whatsapp" target="_blank" rel="noopener noreferrer">
-    
-          <img style={{width:'30px', marginLeft:'-10px', marginRight:'10px'}}  src="./wsp.svg" alt="" />
-          <span>Whastapp</span>
-        </a>
+        <a href="mailto:faku.metal@gmail.com" className="contact-item email"><i className="fa-solid fa-envelope" aria-hidden="true" /><span>{t("contact.email")}</span></a>
+        <a href="https://wa.me/542664894519" className="contact-item whatsapp" target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-whatsapp" aria-hidden="true" /><span>{t("contact.whatsapp")}</span></a>
+        <a href={cvFile} download="CV_Facundo_Journade_2026.pdf" className="contact-item cv"><i className="fa-solid fa-file-arrow-down" aria-hidden="true" /><span>{t("contact.cv")}</span></a>
       </div>
     </section>
   );

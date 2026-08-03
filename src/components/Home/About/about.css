@@ -33,6 +33,34 @@
   flex-direction: column;
 }
 
+.experience-card {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.experience-card h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.15rem;
+}
+
+.experience-card p:not(.about-eyebrow) {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.experience-card .experience-role {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+}
+
+.experience-role span { color: var(--text-muted); font-weight: 500; }
+
+.experience-card a { display: inline-block; margin-top: 0.85rem; font-weight: 600; }
+
 .about-eyebrow {
   margin: 0 0 0.45rem;
   font-size: 0.75rem;

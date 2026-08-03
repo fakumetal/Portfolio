@@ -20,6 +20,34 @@
     transform 0.35s var(--ease-out);
 }
 
+.project-card.is-corrupted {
+  filter: grayscale(1) blur(2.2px) contrast(1.65) brightness(0.58);
+  animation: cardReveal 0.6s var(--ease-out) forwards, cardGlitch 1.15s steps(2, end) infinite;
+}
+
+.project-card.is-corrupted::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.38;
+  background: repeating-linear-gradient(0deg, transparent 0 4px, rgba(239, 68, 68, 0.9) 5px 7px);
+  mix-blend-mode: screen;
+}
+
+@keyframes cardGlitch {
+  0%, 72%, 100% { transform: translateY(0); }
+  74% { transform: translate(-5px, 2px) skewX(-1deg); }
+  78% { transform: translate(5px, -2px) skewX(1deg); }
+  82% { transform: translate(-3px, 1px); }
+  87% { transform: translate(3px, -1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card.is-corrupted { animation: none; }
+}
+
 @keyframes cardReveal {
   to {
     opacity: 1;

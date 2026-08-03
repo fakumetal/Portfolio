@@ -1,78 +1,51 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './header.css';  
+import { useEffect, useRef, useState } from "react";
+import "./header.css";
 import profileImage from "../../assets/projects/1.webp";
-import deletedPortfolioImg from "../../assets/projects/eyes-happy.webp";  
+import deletedPortfolioImg from "../../assets/projects/eyes-happy.webp";
+import { usePortfolio } from "../Home/Projects/PortfolioContext";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPortfolioDeleted, setIsPortfolioDeleted] = useState(false);  
+  const { isPortfolioDeleted } = usePortfolio();
+  const { lang, setLang, t } = useLanguage();
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
 
   useEffect(() => {
-    const portfolioDeleted = localStorage.getItem('isPortfolioDeleted') === 'true';
-    setIsPortfolioDeleted(portfolioDeleted);  
-
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(event.target)) {
+    const closeOnOutsideClick = (event) => {
+      if (!menuRef.current?.contains(event.target) && !buttonRef.current?.contains(event.target)) {
         setIsMenuOpen(false);
       }
     };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    document.addEventListener("mousedown", closeOnOutsideClick);
+    return () => document.removeEventListener("mousedown", closeOnOutsideClick);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-  };
-
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
-      let offset = window.innerWidth > 1500 ? (window.innerHeight / 2) - (section.offsetHeight / 2) : 0;
-      window.scrollTo({
-        top: sectionPosition - offset,
-        behavior: 'smooth',
-      });
-    }
-    setIsMenuOpen(false);  
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-    setIsMenuOpen(false);  
+  const goTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setIsMenuOpen(false);
   };
 
   return (
     <header className="header">
-      <div className="logo">
-        <img
-          src={isPortfolioDeleted ? deletedPortfolioImg : profileImage}  
-          alt="Profile"
-          className="profile-img"
-        />
-        <span className="name">
-          {isPortfolioDeleted ? 'Portfolio' : 'Facundo Journade'}  
-        </span>
-      </div>
-
-      <button className="hamburger" onClick={toggleMenu} ref={buttonRef}>
-        ☰
+      <button className="logo" type="button" onClick={() => goTo("inicio")} aria-label={t("header.goHome")}>
+        <img src={isPortfolioDeleted ? deletedPortfolioImg : profileImage} alt={isPortfolioDeleted ? "Portfolio" : "Facundo Journade"} className="profile-img" />
+        <span className="name">{isPortfolioDeleted ? "Portfolio" : "Facundo Journade"}</span>
       </button>
-
-      <nav ref={menuRef} className={`nav ${isMenuOpen ? 'open' : ''}`}>
-        <button onClick={scrollToTop}>HOME</button>
-        <button onClick={() => scrollToSection('about')}>ABOUT</button>
-        <button onClick={() => scrollToSection('projects')}>PROJECTS</button>
-        <button onClick={() => scrollToSection('contact')}>CONTACT</button>
+      <nav id="site-navigation" ref={menuRef} className={`nav ${isMenuOpen ? "open" : ""}`} aria-label={t("header.navLabel")}>
+        <button type="button" onClick={() => goTo("inicio")}>{t("header.home")}</button>
+        <button type="button" onClick={() => goTo("perfil")}>{t("header.profile")}</button>
+        <button type="button" onClick={() => goTo("proyectos")}>{t("header.projects")}</button>
+        <button type="button" onClick={() => goTo("contacto")}>{t("header.contact")}</button>
       </nav>
+      <div className="header-actions">
+        <div className="lang-switch" role="group" aria-label={t("header.langLabel")}>
+          <button type="button" className={lang === "es" ? "is-active" : ""} onClick={() => setLang("es")} aria-pressed={lang === "es"}>{t("header.langEs")}</button>
+          <button type="button" className={lang === "en" ? "is-active" : ""} onClick={() => setLang("en")} aria-pressed={lang === "en"}>{t("header.langEn")}</button>
+        </div>
+        <button className="hamburger" type="button" onClick={() => setIsMenuOpen((open) => !open)} ref={buttonRef} aria-expanded={isMenuOpen} aria-controls="site-navigation" aria-label={t("header.openNav")}>☰</button>
+      </div>
     </header>
   );
 };

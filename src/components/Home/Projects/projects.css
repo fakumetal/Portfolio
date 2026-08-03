@@ -7,6 +7,13 @@
   margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
+.projects-heading > p:last-child {
+  max-width: 620px;
+  margin: 1rem auto 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
 .projects-eyebrow {
   margin: 0 0 0.5rem;
   font-size: 0.8rem;
@@ -69,6 +76,8 @@ button.see-more-btn {
     transform 0.25s var(--ease-out),
     box-shadow 0.25s var(--ease-out);
 }
+
+.projects-archive { margin-top: 1.5rem; }
 
 button.see-more-btn span {
   display: inline-block;

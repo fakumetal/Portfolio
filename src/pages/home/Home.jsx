@@ -1,86 +1,26 @@
-import  { useEffect, useRef } from 'react';
-import Banner from '../../components/Home/Banner/Banner';
-import About from '../../components/Home/About/About';
-import Projects from '../../components/Home/Projects/Projects';
-import Contact from '../../components/Home/Contact/Contact';
-import './home.css';
+import { useEffect, useRef } from "react";
+import Banner from "../../components/Home/Banner/Banner";
+import About from "../../components/Home/About/About";
+import Projects from "../../components/Home/Projects/Projects";
+import Contact from "../../components/Home/Contact/Contact";
+import { useLanguage } from "../../i18n/LanguageContext";
+import "./home.css";
 
 const Home = () => {
   const sectionsRef = useRef([]);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
+  const { t } = useLanguage();
   useEffect(() => {
-    const options = {
-      threshold: 0.25,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        } else {
-          entry.target.classList.remove('is-visible');
-        }
-      });
-    }, options);
-
-    sectionsRef.current.forEach((section) => {
-      if (section) {
-        observer.observe(section);
-      }
-    });
-
-    return () => {
-      if (sectionsRef.current) {
-        sectionsRef.current.forEach((section) => {
-          if (section) observer.unobserve(section);
-        });
-      }
-    };
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.target.classList.toggle("is-visible", entry.isIntersecting)), { threshold: 0.15 });
+    sectionsRef.current.forEach((section) => section && observer.observe(section));
+    return () => observer.disconnect();
   }, []);
-
-  return (
-    <div>
-      <section
-        id="banner"
-        ref={(el) => (sectionsRef.current[0] = el)}
-        className="fade-in-section"
-      >
-        <Banner />
-      </section>
-      <section
-        id="about"
-        ref={(el) => (sectionsRef.current[1] = el)}
-        className="fade-in-section"
-      >
-        <About />
-      </section>
-      <section
-        id="projects"
-        ref={(el) => (sectionsRef.current[2] = el)}
-        className="fade-in-section"
-      >
-        <Projects />
-      </section>
-      <section
-        id="contact"
-        ref={(el) => (sectionsRef.current[3] = el)}
-        className="fade-in-section"
-      >
-        <Contact />
-      </section>
-      
-      <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
-  <img src="./up.svg" alt="scroll-to-top" style={{width:'35px', height:'50px'}} />
-</button>
-    </div>
-  );
+  return <>
+    <section id="inicio" ref={(el) => (sectionsRef.current[0] = el)} className="banner fade-in-section"><Banner /></section>
+    <section id="perfil" ref={(el) => (sectionsRef.current[1] = el)} className="fade-in-section"><About /></section>
+    <section id="proyectos" ref={(el) => (sectionsRef.current[2] = el)} className="fade-in-section"><Projects /></section>
+    <section id="contacto" ref={(el) => (sectionsRef.current[3] = el)} className="fade-in-section"><Contact /></section>
+    <a className="scroll-to-top" href="#inicio" aria-label={t("home.scrollTop")}><img src="/up.svg" alt="" /></a>
+  </>;
 };
 
 export default Home;

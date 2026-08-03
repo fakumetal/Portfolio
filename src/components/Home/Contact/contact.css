@@ -22,6 +22,8 @@
   margin-bottom: 2.5rem;
 }
 
+.contact-section > p:not(.projects-eyebrow) { text-align: center; }
+
 .contact-info {
   display: flex;
   justify-content: center;
@@ -30,7 +32,7 @@
 }
 
 .contact-info span {
-  width: 80px;
+  min-width: 80px;
 }
 
 .contact-item {
@@ -56,6 +58,17 @@
   font-size: 1.6rem;
   margin-right: 14px;
 }
+
+.contact-item.is-unavailable {
+  cursor: not-allowed;
+  opacity: 0.65;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.contact-item.is-unavailable i { margin: 0; }
+.contact-item.is-unavailable span { min-width: auto; }
+.contact-item small { color: var(--text-muted); font-size: 0.7rem; }
 
 .contact-item:hover {
   transform: translateY(-5px);

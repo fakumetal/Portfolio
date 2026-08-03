@@ -27,6 +27,15 @@
   overflow: hidden;
 }
 
+.banner-eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
 .banner::before {
   content: "";
   position: absolute;
@@ -116,6 +125,30 @@
   color: var(--text-secondary);
   line-height: 1.65;
 }
+
+.banner-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.button-primary { background: var(--accent); border-color: var(--accent); color: #0a1204; }
+.button-primary:hover { color: #0a1204; background: var(--accent-hover); }
+.button-secondary { color: var(--text-primary); }
+.button-secondary:hover { color: var(--accent-hover); border-color: var(--accent); }
 
 .banner-content.show .banner-description {
   opacity: 1;

@@ -1,127 +1,129 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import "./projects.css";
 import { projectsData } from "./ProjectsData";
 import { usePortfolio } from "./PortfolioContext";
-import eyes2 from "../../../assets/projects/eyes-angry.webp";
+import { useLanguage } from "../../../i18n/LanguageContext";
+import eyesAngry from "../../../assets/projects/eyes-angry.webp";
+import PortfolioWarning from "./PortfolioWarning";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showArchive, setShowArchive] = useState(false);
+  const { isPortfolioDeleted, setIsPortfolioDeleted, updatePortfolioDeleteCount } = usePortfolio();
+  const { lang, t, dict } = useLanguage();
+  const featured = projectsData.filter((project) => project.featured);
+  const archive = projectsData.filter((project) => !project.featured);
 
-  const {
-    isPortfolioDeleted,
-    setIsPortfolioDeleted,
-    updatePortfolioDeleteCount,
-  } = usePortfolio();
+  const withCopy = (project) => {
+    const item = dict.projects.items[project.id] || {};
+    return {
+      ...project,
+      description: item.description,
+      contribution: item.contribution,
+      technologies: item.technologies,
+    };
+  };
 
-  const modifiedProjectsData = projectsData.map((project) => {
-    if (project.title === "Portfolio") {
-      return {
-        ...project,
-        backgroundImage: isPortfolioDeleted ? eyes2 : project.backgroundImage,
-        description: isPortfolioDeleted
-          ? "¿ Otra vez aquí ? Piensa bien en tu decisión y actúa con precaución. No te atrevas"
-          : project.description,
-        images: isPortfolioDeleted ? [eyes2] : project.images,
-      };
+  const openProject = (project) => {
+    if (isPortfolioDeleted && !project.isPortfolio) {
+      setSelectedProject({ isWarning: true });
+      return;
     }
-    return project;
-  });
-
-  const title = isPortfolioDeleted ? "..." : "Algunos proyectos";
-  const visibleProjects = showAllProjects
-    ? modifiedProjectsData
-    : modifiedProjectsData.slice(0, 9);
-
-  const scrollToBanner = () => {
-    const bannerSection = document.getElementById("banner");
-    if (bannerSection) {
-      bannerSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleCardClick = (project) => {
-    setSelectedProject(project);
-  };
-
-  /* Solo dispara el easter-egg / juego — no oculta el proyecto */
-  const handlePortfolioDelete = () => {
-    localStorage.setItem("isPortfolioDeleted", "true");
-    const deleteCount =
-      (parseInt(localStorage.getItem("portfolioDeleteCount"), 10) || 0) + 1;
-    updatePortfolioDeleteCount(deleteCount);
-    setIsPortfolioDeleted(true);
-    setSelectedProject(null);
-    scrollToBanner();
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProject(null);
+    const localized = withCopy(project);
+    setSelectedProject(
+      isPortfolioDeleted && project.isPortfolio
+        ? {
+            ...localized,
+            backgroundImage: eyesAngry,
+            isDuel: true,
+            description: t("projects.duelDescription"),
+            contribution: t("projects.duelContribution"),
+          }
+        : localized
+    );
   };
 
   useEffect(() => {
-    if (selectedProject) {
-      document.body.classList.add("no-scroll");
-    } else {
-      document.body.classList.remove("no-scroll");
-    }
+    document.body.classList.toggle("no-scroll", Boolean(selectedProject));
     return () => document.body.classList.remove("no-scroll");
   }, [selectedProject]);
 
-  return (
-    <section id="projects" className="projects">
-      <div className="projects-heading">
-        <p className="projects-eyebrow">Trabajo seleccionado</p>
-        <h2 className="project-title">{title}</h2>
-      </div>
+  useEffect(() => {
+    setSelectedProject((prev) => {
+      if (!prev || prev.isWarning || !prev.id) return prev;
+      const base = projectsData.find((project) => project.id === prev.id);
+      if (!base) return prev;
+      const localized = withCopy(base);
+      if (prev.isDuel) {
+        return {
+          ...localized,
+          backgroundImage: eyesAngry,
+          isDuel: true,
+          description: t("projects.duelDescription"),
+          contribution: t("projects.duelContribution"),
+        };
+      }
+      return {
+        ...localized,
+        backgroundImage: prev.backgroundImage,
+      };
+    });
+  }, [lang]);
 
+  return (
+    <section className="projects" aria-labelledby="projects-title">
+      <div className="projects-heading">
+        <p className="projects-eyebrow">{isPortfolioDeleted ? t("projects.eyebrowDeleted") : t("projects.eyebrow")}</p>
+        <h2 id="projects-title" className="project-title">{isPortfolioDeleted ? t("projects.titleDeleted") : t("projects.title")}</h2>
+        <p>{isPortfolioDeleted ? t("projects.descriptionDeleted") : t("projects.description")}</p>
+      </div>
       <div className="projects-container">
-        {visibleProjects.map((project, index) => (
+        {featured.map((project, index) => (
           <ProjectCard
-            key={project.title}
-            title={project.title}
-            backgroundImage={project.backgroundImage}
-            isInDevelopment={project.isInDevelopment}
-            isLogo={project.isLogo}
+            key={project.id}
+            {...project}
+            backgroundImage={isPortfolioDeleted && project.isPortfolio ? eyesAngry : project.backgroundImage}
+            isCorrupted={isPortfolioDeleted && !project.isPortfolio}
             index={index}
-            onClick={() => handleCardClick(project)}
+            onClick={() => openProject(project)}
           />
         ))}
       </div>
-
-      {modifiedProjectsData.length > 9 && (
-        <button
-          type="button"
-          className="see-more-btn"
-          onClick={() => setShowAllProjects(!showAllProjects)}
-        >
-          <span>{showAllProjects ? "Ver menos" : "Ver más"}</span>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-            className={showAllProjects ? "rotated" : ""}
-          >
-            <path
-              d="M6 9l6 6 6-6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+      {archive.length > 0 && (
+        <>
+          <button type="button" className="see-more-btn" onClick={() => setShowArchive((show) => !show)} aria-expanded={showArchive}>
+            <span>{showArchive ? t("projects.hideArchive") : t("projects.showArchive")}</span>
+          </button>
+          {showArchive && (
+            <div className="projects-container projects-archive">
+              {archive.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  {...project}
+                  isCorrupted={isPortfolioDeleted}
+                  index={index}
+                  onClick={() => openProject(project)}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
-
-      {selectedProject && (
+      {selectedProject?.isWarning && <PortfolioWarning onClose={() => setSelectedProject(null)} />}
+      {selectedProject && !selectedProject.isWarning && (
         <ProjectModal
           project={selectedProject}
-          onClose={handleCloseModal}
-          onDelete={handlePortfolioDelete}
+          onClose={() => setSelectedProject(null)}
+          onDelete={() => {
+            localStorage.setItem("isPortfolioDeleted", "true");
+            const count = Number.parseInt(localStorage.getItem("portfolioDeleteCount") || "0", 10) + 1;
+            updatePortfolioDeleteCount(count);
+            setIsPortfolioDeleted(true);
+            setSelectedProject(null);
+            document.getElementById("inicio")?.scrollIntoView({ behavior: "smooth" });
+          }}
         />
       )}
     </section>

@@ -18,6 +18,15 @@ html {
     var(--bg-base);
 }
 
+.app.portfolio-deleted {
+  background: #000;
+}
+
+.app.portfolio-deleted main,
+.app.portfolio-deleted .header {
+  background-color: #000;
+}
+
 .about h2,
 .projects h2,
 .contact h2 {

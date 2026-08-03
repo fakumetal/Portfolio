@@ -1,47 +1,22 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+/* eslint-disable react/prop-types, react-refresh/only-export-components */
+import { createContext, useContext, useEffect, useState } from "react";
 
-const PortfolioContext = createContext();
+const PortfolioContext = createContext(null);
 
 export const PortfolioProvider = ({ children }) => {
   const [isPortfolioDeleted, setIsPortfolioDeleted] = useState(false);
   const [portfolioDeleteCount, setPortfolioDeleteCount] = useState(0);
-
   useEffect(() => {
-    const checkPortfolioDeleted = () => {
-      const deleted = localStorage.getItem('isPortfolioDeleted') === 'true';
-      const storedCount = localStorage.getItem('portfolioDeleteCount') || '0';
-      setIsPortfolioDeleted(deleted);
-      setPortfolioDeleteCount(parseInt(storedCount, 10));
-    };
-
-    checkPortfolioDeleted();
-
-    const handleStorageChange = () => {
-      checkPortfolioDeleted();
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
-
-  const updatePortfolioDeleteCount = useCallback((count) => {
+    const deleted = localStorage.getItem("isPortfolioDeleted") === "true";
+    const count = Number.parseInt(localStorage.getItem("portfolioDeleteCount") || "0", 10);
+    setIsPortfolioDeleted(deleted);
     setPortfolioDeleteCount(count);
-    localStorage.setItem('portfolioDeleteCount', count.toString());
   }, []);
-
-  return (
-    <PortfolioContext.Provider value={{
-      isPortfolioDeleted,
-      setIsPortfolioDeleted,
-      portfolioDeleteCount,
-      updatePortfolioDeleteCount
-    }}>
-      {children}
-    </PortfolioContext.Provider>
-  );
+  const updatePortfolioDeleteCount = (count) => {
+    setPortfolioDeleteCount(count);
+    localStorage.setItem("portfolioDeleteCount", String(count));
+  };
+  return <PortfolioContext.Provider value={{ isPortfolioDeleted, setIsPortfolioDeleted, portfolioDeleteCount, updatePortfolioDeleteCount }}>{children}</PortfolioContext.Provider>;
 };
 
 export const usePortfolio = () => useContext(PortfolioContext);

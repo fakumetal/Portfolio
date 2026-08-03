@@ -1,20 +1,18 @@
-import { useEffect, useState, useCallback } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useLanguage } from "../../../i18n/LanguageContext";
 import "./projectModal.css";
 
-const extractLink = (html = "") => {
-  const match = html.match(/href=['"]([^'"]+)['"]/);
-  return match ? match[1] : null;
-};
-
 const ProjectModal = ({ project, onClose, onDelete }) => {
+  const { t } = useLanguage();
   const [showModal, setShowModal] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("right");
 
-  const projectLink = extractLink(project?.description);
+  const closeButtonRef = useRef(null);
+  const projectLink = project?.url;
   const isLogo = Boolean(project?.isLogo);
   const hasGallery = Boolean(project?.images?.length);
   const coverImage = hasGallery
@@ -23,19 +21,13 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
 
   useEffect(() => {
     requestAnimationFrame(() => setShowModal(true));
+    closeButtonRef.current?.focus();
   }, []);
 
   const handleClose = useCallback(() => {
     setShowModal(false);
     setTimeout(onClose, 320);
   }, [onClose]);
-
-  const handleDelete = () => setShowConfirmModal(true);
-
-  const confirmDelete = () => {
-    setShowConfirmModal(false);
-    onDelete();
-  };
 
   const openImageModal = (index) => {
     setCurrentIndex(index);
@@ -65,16 +57,21 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
         else if (event.key === "ArrowLeft") prevImage();
         else if (event.key === "Escape") closeImageModal();
       } else if (event.key === "Escape") {
-        if (showConfirmModal) setShowConfirmModal(false);
-        else handleClose();
+        handleClose();
       }
     };
 
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [showImageModal, showConfirmModal, handleClose, nextImage, prevImage]);
+  }, [showImageModal, handleClose, nextImage, prevImage]);
 
   if (!project) return null;
+
+  const modalTitle = project.isWarning
+    ? t("modal.warningTitle")
+    : project.isDuel
+      ? t("modal.duelTitle")
+      : project.title;
 
   const modalTree = (
     <>
@@ -94,7 +91,8 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
             type="button"
             className="modal-close-btn"
             onClick={handleClose}
-            aria-label="Cerrar"
+            ref={closeButtonRef}
+            aria-label={t("modal.close")}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path
@@ -125,7 +123,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                   className="main-image-container"
                   onClick={() => hasGallery && openImageModal(0)}
                   disabled={!hasGallery}
-                  aria-label={hasGallery ? "Ampliar imagen" : undefined}
+                  aria-label={hasGallery ? t("modal.zoomImage") : undefined}
                 >
                   <img
                     src={coverImage}
@@ -148,18 +146,32 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
             <div className="modal-info">
               <header className="modal-header">
                 <div className="modal-title-row">
-                  <h2 id="project-modal-title">{project.title}</h2>
-                  {project.isInDevelopment && (
-                    <span className="modal-status">En desarrollo</span>
-                  )}
+                  <h2 id="project-modal-title">{modalTitle}</h2>
                 </div>
               </header>
 
               <div className="project-description">
-                <p dangerouslySetInnerHTML={{ __html: project.description }} />
+                <p>{project.description}</p>
+                {project.contribution && <p className="project-contribution">{project.contribution}</p>}
               </div>
 
+              {project.technologies?.length > 0 && (
+                <ul className="project-technologies" aria-label={t("modal.technologies")}>
+                  {project.technologies.map((technology) => (
+                    <li key={technology}>{technology}</li>
+                  ))}
+                </ul>
+              )}
+
               <div className="modal-actions">
+                {project.isPortfolio && (
+                  <div className="portfolio-actions">
+                    <button type="button" className="delete-btn" onClick={onDelete}>
+                      <img src={`${import.meta.env.BASE_URL}skull.svg`} alt="" />
+                      <span>{project.isDuel ? t("modal.acceptDuel") : t("modal.delete")}</span>
+                    </button>
+                  </div>
+                )}
                 {projectLink && (
                   <a
                     href={projectLink}
@@ -167,7 +179,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                     rel="noopener noreferrer"
                     className="project-link-btn"
                   >
-                    Visitar sitio
+                    {t("modal.viewProject")}
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                       <path
                         d="M7 17L17 7M17 7H9M17 7v8"
@@ -186,14 +198,14 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                     className="gallery-open-btn"
                     onClick={() => openImageModal(0)}
                   >
-                    Ver galería
+                    {t("modal.viewGallery")}
                   </button>
                 )}
               </div>
 
               {hasGallery && (
                 <div className="gallery-section">
-                  <h3>Galería</h3>
+                  <h3>{t("modal.gallery")}</h3>
                   <div className="thumbnails-container">
                     {project.images.slice(0, 6).map((image, index) => (
                       <button
@@ -201,7 +213,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                         key={index}
                         className="thumbnail-btn"
                         onClick={() => openImageModal(index)}
-                        aria-label={`Imagen ${index + 1}`}
+                        aria-label={t("modal.imageN", { n: index + 1 })}
                       >
                         <img src={image} alt="" className="thumbnail" />
                       </button>
@@ -218,53 +230,10 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                   </div>
                 </div>
               )}
-
-              {project.title === "Portfolio" && (
-                <div className="portfolio-actions">
-                  <button
-                    type="button"
-                    className="delete-btn"
-                    onClick={handleDelete}
-                    title="Eliminar Portfolio"
-                  >
-                    <img src="./skull.svg" alt="" />
-                    <span>Eliminar</span>
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>
       </div>
-
-      {showConfirmModal && (
-        <div className="confirm-modal-overlay" role="presentation">
-          <div
-            className="confirm-modal-content"
-            role="alertdialog"
-            aria-labelledby="confirm-title"
-          >
-            <h3 id="confirm-title">¿Eliminar el portafolio?</h3>
-            <p>Esta acción no se puede deshacer.</p>
-            <div className="confirm-modal-actions">
-              <button
-                type="button"
-                className="btn-cancel"
-                onClick={() => setShowConfirmModal(false)}
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                className="btn-confirm"
-                onClick={confirmDelete}
-              >
-                Eliminar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {showImageModal && (
         <div
@@ -277,13 +246,13 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Galería de imágenes"
+            aria-label={t("modal.imageGallery")}
           >
             <button
               type="button"
               className="image-modal-close"
               onClick={closeImageModal}
-              aria-label="Cerrar galería"
+              aria-label={t("modal.closeGallery")}
             >
               &times;
             </button>
@@ -293,7 +262,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                 type="button"
                 className="carousel-control prev"
                 onClick={prevImage}
-                aria-label="Anterior"
+                aria-label={t("modal.prev")}
               >
                 <img src="./left.svg" alt="" width="28" height="28" />
               </button>
@@ -302,7 +271,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                 <img
                   key={currentIndex}
                   src={project.images[currentIndex]}
-                  alt={`Imagen ${currentIndex + 1}`}
+                  alt={t("modal.imageN", { n: currentIndex + 1 })}
                   className={`carousel-image slide-${direction}`}
                 />
                 <div className="carousel-counter">
@@ -314,7 +283,7 @@ const ProjectModal = ({ project, onClose, onDelete }) => {
                 type="button"
                 className="carousel-control next"
                 onClick={nextImage}
-                aria-label="Siguiente"
+                aria-label={t("modal.next")}
               >
                 <img src="./right.svg" alt="" width="28" height="28" />
               </button>

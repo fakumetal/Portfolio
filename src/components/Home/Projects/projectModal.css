@@ -264,6 +264,28 @@
   margin: 0;
 }
 
+.project-description .project-contribution {
+  margin-top: 0.85rem;
+  color: var(--text-primary);
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: -0.25rem 0 0;
+  list-style: none;
+}
+
+.project-technologies li {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
 .project-description a {
   color: var(--accent);
   border-bottom: 1px solid transparent;

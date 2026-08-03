@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { usePortfolio } from "../Projects/PortfolioContext";
 import "./about.css";
+import { usePortfolio } from "../Projects/PortfolioContext";
+import { useLanguage } from "../../../i18n/LanguageContext";
 
 const DELAY_BETWEEN_ICONS = 50;
 
@@ -17,35 +18,11 @@ const ICONS = [
   "fa-solid fa-code-branch",
 ];
 
-const SKILL_GROUPS = [
-  {
-    label: "Frontend",
-    skills: ["React", "Next.js", "Vue 3", "TypeScript", "JavaScript", "HTML", "CSS", "SCSS", "Material-UI"],
-  },
-  {
-    label: "Backend",
-    skills: ["Node.js", "Express.js", "Python", "Socket.io", "Sequelize"],
-  },
-  {
-    label: "Mobile & Desktop",
-    skills: ["React Native", "Ionic", "Electron"],
-  },
-  {
-    label: "Bases de datos",
-    skills: ["PostgreSQL", "MySQL", "MariaDB", "MongoDB", "Supabase", "Firebase"],
-  },
-  {
-    label: "Cloud & DevOps",
-    skills: ["AWS", "VPS", "Linux", "Git", "GitHub"],
-  },
-];
-
-const DESCRIPTION =
-  "Desarrollador Full Stack con experiencia en aplicaciones web, móviles y de escritorio, especializado en React, Next.js, Vue 3, React Native, Node.js y TypeScript. Experiencia en arquitecturas API-first, sistemas multi-tenant, APIs seguras, modelado de datos y optimización de soluciones productivas. Aplico Spec-Driven Development e inteligencia artificial supervisada para automatización, refactorización, testing y documentación. Perfil orientado a producto, con participación desde la definición funcional hasta el despliegue y evolución en producción.";
-
 const About = () => {
   const [visibleIcons, setVisibleIcons] = useState(0);
   const { isPortfolioDeleted } = usePortfolio();
+  const { t, dict } = useLanguage();
+  const skillGroups = dict.about.skillGroups;
 
   useEffect(() => {
     let iconIndex = 0;
@@ -65,9 +42,9 @@ const About = () => {
         className={`about-container ${isPortfolioDeleted ? "is-deleted" : ""}`}
       >
         <div className="about-description">
-          <p className="about-eyebrow">Perfil</p>
-          <h2>{isPortfolioDeleted ? "Sobre mi creador..." : "Sobre Mí"}</h2>
-          <p className="about-text">{DESCRIPTION}</p>
+          <p className="about-eyebrow">{isPortfolioDeleted ? t("about.eyebrowDeleted") : t("about.eyebrow")}</p>
+          <h2>{isPortfolioDeleted ? t("about.titleDeleted") : t("about.title")}</h2>
+          <p className="about-text">{isPortfolioDeleted ? t("about.descriptionDeleted") : t("about.description")}</p>
           <div className="skills-icons">
             {ICONS.map((iconClass, index) => (
               <i
@@ -77,13 +54,20 @@ const About = () => {
               />
             ))}
           </div>
+          <div className="experience-card">
+            <p className="about-eyebrow">{t("about.experienceEyebrow")}</p>
+            <h3>UribaSoft</h3>
+            <p className="experience-role">{t("about.experienceRole")} <span>{t("about.experiencePeriod")}</span></p>
+            <p>{t("about.experienceBody")}</p>
+            <a href="https://www.uribasoft.com/" target="_blank" rel="noopener noreferrer">{t("about.visitUribaSoft")} <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
 
         <div className="about-skills">
-          <p className="about-eyebrow">Stack</p>
-          <h3>Habilidades Técnicas</h3>
+          <p className="about-eyebrow">{t("about.stackEyebrow")}</p>
+          <h3>{t("about.skillsTitle")}</h3>
           <div className="skill-groups">
-            {SKILL_GROUPS.map((group) => (
+            {skillGroups.map((group) => (
               <div key={group.label} className="skill-group">
                 <h4 className="skill-group-label">{group.label}</h4>
                 <div className="skills-grid">
