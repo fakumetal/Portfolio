@@ -1,14 +1,27 @@
 .contact-section {
-  padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 4vw, 3rem);
+  position: relative;
+  padding: clamp(4.5rem, 11vw, 9rem) clamp(1.25rem, 4vw, 3rem);
   margin-top: 2rem;
-  min-height: 50vh;
+  min-height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+}
+
+.contact-glow {
+  position: absolute;
+  inset: auto 0 0;
+  height: 70%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 100%, rgba(115, 186, 37, 0.14), transparent 70%),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.03), transparent 45%);
 }
 
 .contact-section h2 {
-  font-size: clamp(2rem, 4vw, 2.5rem);
+  position: relative;
+  font-size: clamp(2rem, 4vw, 2.7rem);
   font-family: var(--font-display);
   color: var(--text-primary);
   margin-bottom: 12px;
@@ -16,15 +29,38 @@
   letter-spacing: -0.03em;
 }
 
-.contact-section p {
+.contact-lead {
+  position: relative;
   font-size: 1.05rem;
   color: var(--text-secondary);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 540px;
+  text-align: center;
+  line-height: 1.6;
 }
 
-.contact-section > p:not(.projects-eyebrow) { text-align: center; }
+.contact-divider {
+  position: relative;
+  width: min(180px, 40vw);
+  height: 1px;
+  margin-bottom: 2.25rem;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.7;
+  transform: scaleX(0);
+}
+
+.fade-in-section.is-visible .contact-divider {
+  animation: contactLine 0.9s var(--ease-out) forwards;
+}
+
+@keyframes contactLine {
+  to {
+    transform: scaleX(1);
+  }
+}
 
 .contact-info {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -36,13 +72,15 @@
 }
 
 .contact-item {
+  position: relative;
   display: flex;
   align-items: center;
-  background: var(--bg-surface);
+  background: rgba(26, 26, 30, 0.72);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 1rem 1.5rem;
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
   transition:
     transform 0.3s var(--ease-out),
     box-shadow 0.3s var(--ease-out),
@@ -52,29 +90,37 @@
   color: var(--text-primary);
   font-size: 1.05rem;
   font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.contact-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(115, 186, 37, 0.12), transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.55s var(--ease-out);
+}
+
+.contact-item:hover::before {
+  transform: translateX(120%);
 }
 
 .contact-item i {
+  position: relative;
   font-size: 1.6rem;
   margin-right: 14px;
 }
 
-.contact-item.is-unavailable {
-  cursor: not-allowed;
-  opacity: 0.65;
-  flex-direction: column;
-  gap: 0.15rem;
+.contact-item span {
+  position: relative;
 }
 
-.contact-item.is-unavailable i { margin: 0; }
-.contact-item.is-unavailable span { min-width: auto; }
-.contact-item small { color: var(--text-muted); font-size: 0.7rem; }
-
 .contact-item:hover {
-  transform: translateY(-5px);
-  border-color: var(--border-strong);
+  transform: translateY(-6px);
+  border-color: rgba(115, 186, 37, 0.4);
   background: var(--bg-hover);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
   color: var(--text-primary);
 }
 
@@ -84,6 +130,10 @@
 
 .whatsapp i {
   color: #25d366;
+}
+
+.cv i {
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {
@@ -101,5 +151,16 @@
 
   .contact-section {
     margin-bottom: 4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-divider {
+    transform: none;
+    animation: none;
+  }
+
+  .contact-item::before {
+    display: none;
   }
 }

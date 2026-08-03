@@ -7,7 +7,17 @@
   padding: 8px;
   margin-bottom: 8px;
   display: inline-block;
+  opacity: 0;
+  transform: translateY(12px) scale(0.92);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out),
+    border-color 0.3s ease;
+}
+
+.banner-content.show .console-icon {
   opacity: 0.9;
+  transform: translateY(0) scale(1);
 }
 
 .eyes-video {
@@ -34,6 +44,16 @@
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s var(--ease-out) 0.12s,
+    transform 0.7s var(--ease-out) 0.12s;
+}
+
+.banner-content.show .banner-eyebrow {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .banner::before {
@@ -41,69 +61,54 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(115, 186, 37, 0.1), transparent 70%),
-    radial-gradient(circle at 20% 80%, rgba(115, 186, 37, 0.05), transparent 40%);
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(115, 186, 37, 0.12), transparent 70%),
+    radial-gradient(circle at 20% 80%, rgba(115, 186, 37, 0.06), transparent 40%);
   pointer-events: none;
+  animation: bannerGlow 8s ease-in-out infinite alternate;
 }
 
-.banner .skills-icons {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  max-width: 700px;
-  margin: 48px auto 0;
-}
-
-.skills-icons i {
-  opacity: 0;
-  transform: translateY(16px) scale(0.9);
-  font-size: 1.55rem;
-  color: var(--text-secondary);
-  transition:
-    opacity 0.45s var(--ease-out),
-    transform 0.45s var(--ease-out),
-    color 0.25s ease;
-}
-
-.skills-icons i.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.skills-icons i:hover {
-  color: var(--accent);
-}
-
-.dot {
-  color: var(--accent);
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
+@keyframes bannerGlow {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
   }
-  50% {
-    opacity: 0;
+  to {
+    opacity: 1;
+    transform: scale(1.08);
   }
 }
 
 .banner-content {
+  --spot-x: 50%;
+  --spot-y: 42%;
   position: relative;
   text-align: center;
-  opacity: 0;
-  transform: translateY(40px);
-  transition:
-    opacity 0.9s var(--ease-out),
-    transform 0.9s var(--ease-out);
   padding: 0 1.25rem;
+  z-index: 1;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.banner-content.show {
+.banner-spotlight {
+  position: absolute;
+  inset: -40% -20%;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--spot-x) var(--spot-y),
+    rgba(115, 186, 37, 0.16),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: -1;
+}
+
+.banner-content.show .banner-spotlight {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .banner-title {
@@ -115,15 +120,47 @@
   line-height: 1.1;
 }
 
+.banner-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.banner-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%);
+  filter: blur(6px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out),
+    filter 0.7s var(--ease-out);
+  transition-delay: calc(0.22s + var(--i) * 0.08s);
+}
+
+.banner-content.show .banner-word {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
 .banner-description {
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   opacity: 0;
-  transition: opacity 1.2s var(--ease-out) 0.2s;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s var(--ease-out) 0.55s,
+    transform 0.9s var(--ease-out) 0.55s;
   font-family: var(--font-body);
   width: min(900px, 90vw);
   margin: 1.5rem auto 0;
   color: var(--text-secondary);
   line-height: 1.65;
+}
+
+.banner-content.show .banner-description {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .banner-actions {
@@ -132,57 +169,111 @@
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s var(--ease-out) 0.75s,
+    transform 0.8s var(--ease-out) 0.75s;
+}
+
+.banner-content.show .banner-actions {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 46px;
-  padding: 0.7rem 1.2rem;
+  padding: 0.7rem 1.35rem;
   border: 1px solid var(--border-strong);
   border-radius: 999px;
   font-weight: 700;
+  overflow: hidden;
+  transition:
+    transform 0.3s var(--ease-spring),
+    box-shadow 0.3s var(--ease-out),
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
-.button-primary { background: var(--accent); border-color: var(--accent); color: #0a1204; }
-.button-primary:hover { color: #0a1204; background: var(--accent-hover); }
-.button-secondary { color: var(--text-primary); }
-.button-secondary:hover { color: var(--accent-hover); border-color: var(--accent); }
+.button span {
+  position: relative;
+  z-index: 1;
+}
 
-.banner-content.show .banner-description {
+.button-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a1204;
+  box-shadow: 0 0 0 0 rgba(115, 186, 37, 0.35);
+}
+
+.button-primary:hover {
+  color: #0a1204;
+  background: var(--accent-hover);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(115, 186, 37, 0.28);
+}
+
+.button-primary:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.button-secondary {
+  color: var(--text-primary);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.button-secondary:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  background: rgba(115, 186, 37, 0.08);
+}
+
+.banner-scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 1.75rem;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out) 1.1s;
+}
+
+.banner-content.show .banner-scroll-hint {
   opacity: 1;
 }
 
-.banner-secure {
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  font-family: var(--font-body);
-  justify-content: center;
-  gap: 10px;
-}
-
-.banner-button {
-  background-color: var(--accent);
-  color: #041018;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
+.banner-scroll-hint span {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
   border-radius: 999px;
-  margin-top: 20px;
-  transition:
-    background 0.25s ease,
-    transform 0.25s var(--ease-out);
-  font-family: var(--font-body);
+  background: var(--accent);
+  animation: scrollPulse 1.6s var(--ease-out) infinite;
 }
 
-.banner-button:hover {
-  background-color: var(--accent-hover);
-  transform: translateY(-2px);
+@keyframes scrollPulse {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 }
 
 @media (max-width: 680px) {
@@ -195,18 +286,29 @@
     font-size: 1.05rem;
   }
 
-  .skills-icons {
-    width: 90%;
-    justify-content: center;
+  .banner-scroll-hint {
+    bottom: 1.25rem;
+  }
+
+  .banner-spotlight {
+    display: none;
   }
 }
 
-@media (max-width: 580px) {
-  .banner .skills-icons {
-    justify-content: center;
+@media (prefers-reduced-motion: reduce) {
+  .banner::before,
+  .banner-scroll-hint span {
+    animation: none;
   }
 
-  .banner-description {
-    margin-top: 10px;
+  .banner-word,
+  .banner-eyebrow,
+  .console-icon,
+  .banner-description,
+  .banner-actions {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }

@@ -206,6 +206,30 @@ const en = {
     whatsapp: "WhatsApp",
     cv: "Download CV",
   },
+  process: {
+    eyebrow: "Method",
+    title: "How I build products.",
+    description:
+      "A clear end-to-end process: discover the problem, design the experience, build with solidity, and ship to production.",
+    steps: {
+      discover: {
+        title: "Discover",
+        body: "I understand the problem, the users, and the real constraints before writing a line of code.",
+      },
+      design: {
+        title: "Design",
+        body: "I define flows, UX, and architecture so the product is usable, scalable, and sustainable.",
+      },
+      build: {
+        title: "Build",
+        body: "I develop frontend, backend, and infrastructure with a focus on quality, security, and iteration speed.",
+      },
+      ship: {
+        title: "Ship",
+        body: "I deploy, monitor, and evolve the product in production with continuous improvements.",
+      },
+    },
+  },
   home: {
     scrollTop: "Back to top",
   },

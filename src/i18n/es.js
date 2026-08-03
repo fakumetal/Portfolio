@@ -206,6 +206,30 @@ const es = {
     whatsapp: "WhatsApp",
     cv: "Descargar CV",
   },
+  process: {
+    eyebrow: "Método",
+    title: "Cómo construyo productos.",
+    description:
+      "Un proceso claro de punta a punta: descubrir el problema, diseñar la experiencia, construir con solidez y llevarlo a producción.",
+    steps: {
+      discover: {
+        title: "Discover",
+        body: "Entiendo el problema, los usuarios y las restricciones reales antes de escribir una línea de código.",
+      },
+      design: {
+        title: "Design",
+        body: "Defino flujos, UX y arquitectura para que el producto sea usable, escalable y sostenible.",
+      },
+      build: {
+        title: "Build",
+        body: "Desarrollo frontend, backend e infraestructura con foco en calidad, seguridad y velocidad de iteración.",
+      },
+      ship: {
+        title: "Ship",
+        body: "Despliego, monitoreo y evoluciono el producto en producción con mejoras continuas.",
+      },
+    },
+  },
   home: {
     scrollTop: "Volver al inicio",
   },
